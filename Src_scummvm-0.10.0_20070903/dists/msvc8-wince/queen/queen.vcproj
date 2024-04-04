@@ -13,13 +13,16 @@
 			Name="Pocket PC 2003 (ARMV4)"
 		/>
 		<Platform
-			Name="PMP2500 (MIPSII)"
-		/>
-		<Platform
 			Name="STANDARDSDK_500 (MIPSII)"
 		/>
 		<Platform
 			Name="Windows Mobile 5.0 Pocket PC SDK (ARMV4I)"
+		/>
+		<Platform
+			Name="STANDARDSDK_500 (x86)"
+		/>
+		<Platform
+			Name="PMP2500 (MIPSII)"
 		/>
 	</Platforms>
 	<ToolFiles>
@@ -196,9 +199,9 @@
 			/>
 		</Configuration>
 		<Configuration
-			Name="Release|PMP2500 (MIPSII)"
-			OutputDirectory="PMP2500 (MIPSII)\$(ConfigurationName)"
-			IntermediateDirectory="PMP2500 (MIPSII)\$(ConfigurationName)"
+			Name="Release|STANDARDSDK_500 (MIPSII)"
+			OutputDirectory="STANDARDSDK_500 (MIPSII)\$(ConfigurationName)"
+			IntermediateDirectory="STANDARDSDK_500 (MIPSII)\$(ConfigurationName)"
 			ConfigurationType="4"
 			InheritedPropertySheets="$(VCInstallDir)VCProjectDefaults\UpgradeFromVC60.vsprops"
 			UseOfMFC="0"
@@ -229,7 +232,92 @@
 				Optimization="2"
 				InlineFunctionExpansion="1"
 				AdditionalIncludeDirectories="../../../,../../../common/,../../../backends/platform/wince/,../../../backends/platform/wince/missing/,../../../backends/platform/wince/CEgui,../../../backends/platform/wince/CEkeys,../../../engines,../../../backends/platform/wince/missing/libinclude,"
-				PreprocessorDefinitions="NDEBUG;_WIN32_WCE=$(CEVER);$(CePlatform);WIN32;$(ARCHFAM);$(_ARCHFAM_);UNDER_CE=$(CEVER);UNICODE;SCUMM_NEED_ALIGNMENT;FPM_DEFAULT;NONSTANDARD_PORT;USE_MAD;USE_VORBIS;USE_TREMOR;USE_MPEG2;USE_FLAC;USE_ZLIB;USE_KOREAN_V1;DISABLE_SMUSHREDRAW"
+				PreprocessorDefinitions="_WIN32_WCE=$(CEVER);$(CePlatform);NDEBUG;$(ARCHFAM);$(_ARCHFAM_);UNDER_CE=$(CEVER);UNICODE;SCUMM_NEED_ALIGNMENT;FPM_DEFAULT;USE_MAD;NONSTANDARD_PORT;USE_VORBIS;USE_TREMOR;USE_MPEG2;WIN32;DISABLE_SAGA;USE_ZLIB;USE_FLAC;DISABLE_AGI;DISABLE_LURE;DISABLE_CINE"
+				StringPooling="true"
+				RuntimeLibrary="0"
+				EnableFunctionLevelLinking="true"
+				UsePrecompiledHeader="0"
+				PrecompiledHeaderFile="$(PlatformName)\$(ConfigurationName)/queen.pch"
+				AssemblerListingLocation="$(PlatformName)\$(ConfigurationName)/"
+				ObjectFile="$(PlatformName)\$(ConfigurationName)/"
+				ProgramDataBaseFileName="$(PlatformName)\$(ConfigurationName)/"
+				WarningLevel="3"
+				SuppressStartupBanner="true"
+			/>
+			<Tool
+				Name="VCManagedResourceCompilerTool"
+			/>
+			<Tool
+				Name="VCResourceCompilerTool"
+				Culture="1033"
+			/>
+			<Tool
+				Name="VCPreLinkEventTool"
+			/>
+			<Tool
+				Name="VCLibrarianTool"
+				OutputFile="$(PlatformName)\$(ConfigurationName)\queen.lib"
+			/>
+			<Tool
+				Name="VCALinkTool"
+			/>
+			<Tool
+				Name="VCXDCMakeTool"
+			/>
+			<Tool
+				Name="VCBscMakeTool"
+				SuppressStartupBanner="true"
+				OutputFile="$(PlatformName)\$(ConfigurationName)/queen.bsc"
+			/>
+			<Tool
+				Name="VCCodeSignTool"
+			/>
+			<Tool
+				Name="VCPostBuildEventTool"
+			/>
+			<DeploymentTool
+				ForceDirty="-1"
+				RemoteDirectory=""
+				RegisterOutput="0"
+				AdditionalFiles=""
+			/>
+			<DebuggerTool
+			/>
+		</Configuration>
+		<Configuration
+			Name="Release|Windows Mobile 5.0 Pocket PC SDK (ARMV4I)"
+			OutputDirectory="$(PlatformName)\$(ConfigurationName)"
+			IntermediateDirectory="$(PlatformName)\$(ConfigurationName)"
+			ConfigurationType="4"
+			InheritedPropertySheets="$(VCInstallDir)VCProjectDefaults\UpgradeFromVC60.vsprops"
+			UseOfMFC="0"
+			ATLMinimizesCRunTimeLibraryUsage="false"
+			CharacterSet="1"
+			>
+			<Tool
+				Name="VCPreBuildEventTool"
+			/>
+			<Tool
+				Name="VCCustomBuildTool"
+			/>
+			<Tool
+				Name="VCXMLDataGeneratorTool"
+			/>
+			<Tool
+				Name="VCWebServiceProxyGeneratorTool"
+			/>
+			<Tool
+				Name="VCMIDLTool"
+				TypeLibraryName="$(PlatformName)\$(ConfigurationName)/queen.tlb"
+				HeaderFileName=""
+			/>
+			<Tool
+				Name="VCCLCompilerTool"
+				ExecutionBucket="7"
+				Optimization="2"
+				InlineFunctionExpansion="1"
+				AdditionalIncludeDirectories="../../../,../../../common/,../../../backends/wince/,../../../backends/wince/missing/,../../../backends/wince/CEgui,../../../backends/wince/CEkeys"
+				PreprocessorDefinitions="_LIB;_WIN32_WCE=$(CEVER);$(CePlatform);NDEBUG;ARM;_ARM_;ARMV4;UNDER_CE=$(CEVER);UNICODE;SCUMM_NEED_ALIGNMENT;FPM_DEFAULT;USE_MAD;NONSTANDARD_PORT;USE_VORBIS;USE_TREMOR;WIN32;DISABLE_KYRA;USE_MPEG2;USE_ZLIB"
 				StringPooling="true"
 				RuntimeLibrary="0"
 				EnableFunctionLevelLinking="true"
@@ -448,176 +536,6 @@
 			/>
 		</Configuration>
 		<Configuration
-			Name="Debug|PMP2500 (MIPSII)"
-			OutputDirectory="PMP2500 (MIPSII)\$(ConfigurationName)"
-			IntermediateDirectory="PMP2500 (MIPSII)\$(ConfigurationName)"
-			ConfigurationType="4"
-			InheritedPropertySheets="$(VCInstallDir)VCProjectDefaults\UpgradeFromVC60.vsprops"
-			UseOfMFC="0"
-			ATLMinimizesCRunTimeLibraryUsage="false"
-			CharacterSet="1"
-			>
-			<Tool
-				Name="VCPreBuildEventTool"
-			/>
-			<Tool
-				Name="VCCustomBuildTool"
-			/>
-			<Tool
-				Name="VCXMLDataGeneratorTool"
-			/>
-			<Tool
-				Name="VCWebServiceProxyGeneratorTool"
-			/>
-			<Tool
-				Name="VCMIDLTool"
-				TargetEnvironment="1"
-				TypeLibraryName="$(PlatformName)\$(ConfigurationName)/queen.tlb"
-				HeaderFileName=""
-			/>
-			<Tool
-				Name="VCCLCompilerTool"
-				ExecutionBucket="7"
-				Optimization="0"
-				AdditionalIncludeDirectories="../../../,../../../common/,../../../backends/platform/wince/,../../../backends/platform/wince/missing/,../../../backends/platform/wince/CEgui,../../../backends/platform/wince/CEkeys,../../../engines,../../../backends/platform/wince/missing/libinclude,"
-				PreprocessorDefinitions="DEBUG;_DEBUG;_WIN32_WCE=$(CEVER);UNDER_CE;WINCE;WIN32;_LIB;$(ARCHFAM);$(_ARCHFAM_);_UNICODE;UNICODE;USE_WINDBG;SCUMM_NEED_ALIGNMENT;FPM_DEFAULT;NONSTANDARD_PORT;USE_MAD;USE_VORBIS;USE_TREMOR;USE_MPEG2;USE_FLAC;USE_ZLIB;USE_KOREAN_V1;DISABLE_SMUSHREDRAW"
-				RuntimeLibrary="1"
-				UsePrecompiledHeader="0"
-				PrecompiledHeaderFile="$(PlatformName)\$(ConfigurationName)/queen.pch"
-				AssemblerListingLocation="$(PlatformName)\$(ConfigurationName)/"
-				ObjectFile="$(PlatformName)\$(ConfigurationName)/"
-				ProgramDataBaseFileName="$(PlatformName)\$(ConfigurationName)/"
-				WarningLevel="3"
-				SuppressStartupBanner="true"
-				DebugInformationFormat="3"
-			/>
-			<Tool
-				Name="VCManagedResourceCompilerTool"
-			/>
-			<Tool
-				Name="VCResourceCompilerTool"
-				Culture="1033"
-			/>
-			<Tool
-				Name="VCPreLinkEventTool"
-			/>
-			<Tool
-				Name="VCLibrarianTool"
-				OutputFile="$(PlatformName)\$(ConfigurationName)\queen.lib"
-			/>
-			<Tool
-				Name="VCALinkTool"
-			/>
-			<Tool
-				Name="VCXDCMakeTool"
-			/>
-			<Tool
-				Name="VCBscMakeTool"
-				SuppressStartupBanner="true"
-				OutputFile="$(PlatformName)\$(ConfigurationName)/queen.bsc"
-			/>
-			<Tool
-				Name="VCCodeSignTool"
-			/>
-			<Tool
-				Name="VCPostBuildEventTool"
-			/>
-			<DeploymentTool
-				ForceDirty="-1"
-				RemoteDirectory=""
-				RegisterOutput="0"
-				AdditionalFiles=""
-			/>
-			<DebuggerTool
-			/>
-		</Configuration>
-		<Configuration
-			Name="Release|STANDARDSDK_500 (MIPSII)"
-			OutputDirectory="STANDARDSDK_500 (MIPSII)\$(ConfigurationName)"
-			IntermediateDirectory="STANDARDSDK_500 (MIPSII)\$(ConfigurationName)"
-			ConfigurationType="4"
-			InheritedPropertySheets="$(VCInstallDir)VCProjectDefaults\UpgradeFromVC60.vsprops"
-			UseOfMFC="0"
-			ATLMinimizesCRunTimeLibraryUsage="false"
-			CharacterSet="1"
-			>
-			<Tool
-				Name="VCPreBuildEventTool"
-			/>
-			<Tool
-				Name="VCCustomBuildTool"
-			/>
-			<Tool
-				Name="VCXMLDataGeneratorTool"
-			/>
-			<Tool
-				Name="VCWebServiceProxyGeneratorTool"
-			/>
-			<Tool
-				Name="VCMIDLTool"
-				TargetEnvironment="1"
-				TypeLibraryName="$(PlatformName)\$(ConfigurationName)/queen.tlb"
-				HeaderFileName=""
-			/>
-			<Tool
-				Name="VCCLCompilerTool"
-				ExecutionBucket="7"
-				Optimization="2"
-				InlineFunctionExpansion="1"
-				AdditionalIncludeDirectories="../../../,../../../common/,../../../backends/platform/wince/,../../../backends/platform/wince/missing/,../../../backends/platform/wince/CEgui,../../../backends/platform/wince/CEkeys,../../../engines,../../../backends/platform/wince/missing/libinclude,"
-				PreprocessorDefinitions="_WIN32_WCE=$(CEVER);$(CePlatform);NDEBUG;$(ARCHFAM);$(_ARCHFAM_);UNDER_CE=$(CEVER);UNICODE;SCUMM_NEED_ALIGNMENT;FPM_DEFAULT;USE_MAD;NONSTANDARD_PORT;USE_VORBIS;USE_TREMOR;USE_MPEG2;WIN32;DISABLE_SAGA;USE_ZLIB;USE_FLAC;DISABLE_AGI;DISABLE_LURE;DISABLE_CINE"
-				StringPooling="true"
-				RuntimeLibrary="0"
-				EnableFunctionLevelLinking="true"
-				UsePrecompiledHeader="0"
-				PrecompiledHeaderFile="$(PlatformName)\$(ConfigurationName)/queen.pch"
-				AssemblerListingLocation="$(PlatformName)\$(ConfigurationName)/"
-				ObjectFile="$(PlatformName)\$(ConfigurationName)/"
-				ProgramDataBaseFileName="$(PlatformName)\$(ConfigurationName)/"
-				WarningLevel="3"
-				SuppressStartupBanner="true"
-			/>
-			<Tool
-				Name="VCManagedResourceCompilerTool"
-			/>
-			<Tool
-				Name="VCResourceCompilerTool"
-				Culture="1033"
-			/>
-			<Tool
-				Name="VCPreLinkEventTool"
-			/>
-			<Tool
-				Name="VCLibrarianTool"
-				OutputFile="$(PlatformName)\$(ConfigurationName)\queen.lib"
-			/>
-			<Tool
-				Name="VCALinkTool"
-			/>
-			<Tool
-				Name="VCXDCMakeTool"
-			/>
-			<Tool
-				Name="VCBscMakeTool"
-				SuppressStartupBanner="true"
-				OutputFile="$(PlatformName)\$(ConfigurationName)/queen.bsc"
-			/>
-			<Tool
-				Name="VCCodeSignTool"
-			/>
-			<Tool
-				Name="VCPostBuildEventTool"
-			/>
-			<DeploymentTool
-				ForceDirty="-1"
-				RemoteDirectory=""
-				RegisterOutput="0"
-				AdditionalFiles=""
-			/>
-			<DebuggerTool
-			/>
-		</Configuration>
-		<Configuration
 			Name="Debug|STANDARDSDK_500 (MIPSII)"
 			OutputDirectory="STANDARDSDK_500 (MIPSII)\$(ConfigurationName)"
 			IntermediateDirectory="STANDARDSDK_500 (MIPSII)\$(ConfigurationName)"
@@ -702,7 +620,7 @@
 			/>
 		</Configuration>
 		<Configuration
-			Name="Release|Windows Mobile 5.0 Pocket PC SDK (ARMV4I)"
+			Name="Debug|Windows Mobile 5.0 Pocket PC SDK (ARMV4I)"
 			OutputDirectory="$(PlatformName)\$(ConfigurationName)"
 			IntermediateDirectory="$(PlatformName)\$(ConfigurationName)"
 			ConfigurationType="4"
@@ -731,10 +649,94 @@
 			<Tool
 				Name="VCCLCompilerTool"
 				ExecutionBucket="7"
+				Optimization="0"
+				AdditionalIncludeDirectories="../../../,../../../common/,../../../backends/wince/,../../../backends/wince/missing/,../../../backends/wince/CEgui,../../../backends/wince/CEkeys"
+				PreprocessorDefinitions="_LIB;DISABLE_SWORD1;DEBUG;_WIN32_WCE=$(CEVER);$(CePlatform);ARM;_ARM_;ARMV4;UNDER_CE=$(CEVER);UNICODE;SCUMM_NEED_ALIGNMENT;FPM_DEFAULT;USE_MAD;NONSTANDARD_PORT;USE_VORBIS;USE_TREMOR;USE_MPEG2;WIN32;DISABLE_KYRA;USE_ZLIB;USE_WINDBG"
+				RuntimeLibrary="1"
+				UsePrecompiledHeader="0"
+				PrecompiledHeaderFile="$(PlatformName)\$(ConfigurationName)/queen.pch"
+				AssemblerListingLocation="$(PlatformName)\$(ConfigurationName)/"
+				ObjectFile="$(PlatformName)\$(ConfigurationName)/"
+				ProgramDataBaseFileName="$(PlatformName)\$(ConfigurationName)/"
+				WarningLevel="3"
+				SuppressStartupBanner="true"
+				DebugInformationFormat="3"
+			/>
+			<Tool
+				Name="VCManagedResourceCompilerTool"
+			/>
+			<Tool
+				Name="VCResourceCompilerTool"
+				Culture="1033"
+			/>
+			<Tool
+				Name="VCPreLinkEventTool"
+			/>
+			<Tool
+				Name="VCLibrarianTool"
+				OutputFile="$(PlatformName)\$(ConfigurationName)\queen.lib"
+			/>
+			<Tool
+				Name="VCALinkTool"
+			/>
+			<Tool
+				Name="VCXDCMakeTool"
+			/>
+			<Tool
+				Name="VCBscMakeTool"
+				SuppressStartupBanner="true"
+				OutputFile="$(PlatformName)\$(ConfigurationName)/queen.bsc"
+			/>
+			<Tool
+				Name="VCCodeSignTool"
+			/>
+			<Tool
+				Name="VCPostBuildEventTool"
+			/>
+			<DeploymentTool
+				ForceDirty="-1"
+				RemoteDirectory=""
+				RegisterOutput="0"
+				AdditionalFiles=""
+			/>
+			<DebuggerTool
+			/>
+		</Configuration>
+		<Configuration
+			Name="Release|STANDARDSDK_500 (x86)"
+			OutputDirectory="STANDARDSDK_500 (x86)\$(ConfigurationName)"
+			IntermediateDirectory="STANDARDSDK_500 (x86)\$(ConfigurationName)"
+			ConfigurationType="4"
+			InheritedPropertySheets="$(VCInstallDir)VCProjectDefaults\UpgradeFromVC60.vsprops"
+			UseOfMFC="0"
+			ATLMinimizesCRunTimeLibraryUsage="false"
+			CharacterSet="1"
+			>
+			<Tool
+				Name="VCPreBuildEventTool"
+			/>
+			<Tool
+				Name="VCCustomBuildTool"
+			/>
+			<Tool
+				Name="VCXMLDataGeneratorTool"
+			/>
+			<Tool
+				Name="VCWebServiceProxyGeneratorTool"
+			/>
+			<Tool
+				Name="VCMIDLTool"
+				TargetEnvironment="1"
+				TypeLibraryName="$(PlatformName)\$(ConfigurationName)/queen.tlb"
+				HeaderFileName=""
+			/>
+			<Tool
+				Name="VCCLCompilerTool"
+				ExecutionBucket="7"
 				Optimization="2"
 				InlineFunctionExpansion="1"
-				AdditionalIncludeDirectories="../../../,../../../common/,../../../backends/wince/,../../../backends/wince/missing/,../../../backends/wince/CEgui,../../../backends/wince/CEkeys"
-				PreprocessorDefinitions="_LIB;_WIN32_WCE=$(CEVER);$(CePlatform);NDEBUG;ARM;_ARM_;ARMV4;UNDER_CE=$(CEVER);UNICODE;SCUMM_NEED_ALIGNMENT;FPM_DEFAULT;USE_MAD;NONSTANDARD_PORT;USE_VORBIS;USE_TREMOR;WIN32;DISABLE_KYRA;USE_MPEG2;USE_ZLIB"
+				AdditionalIncludeDirectories="../../../,../../../common/,../../../backends/platform/wince/,../../../backends/platform/wince/missing/,../../../backends/platform/wince/CEgui,../../../backends/platform/wince/CEkeys,../../../engines,../../../backends/platform/wince/missing/libinclude,"
+				PreprocessorDefinitions="_WIN32_WCE=$(CEVER);$(CePlatform);NDEBUG;$(ARCHFAM);$(_ARCHFAM_);UNDER_CE=$(CEVER);UNICODE;SCUMM_NEED_ALIGNMENT;FPM_DEFAULT;USE_MAD;NONSTANDARD_PORT;USE_VORBIS;USE_TREMOR;USE_MPEG2;WIN32;DISABLE_SAGA;USE_ZLIB;USE_FLAC;DISABLE_AGI;DISABLE_LURE;DISABLE_CINE"
 				StringPooling="true"
 				RuntimeLibrary="0"
 				EnableFunctionLevelLinking="true"
@@ -787,9 +789,9 @@
 			/>
 		</Configuration>
 		<Configuration
-			Name="Debug|Windows Mobile 5.0 Pocket PC SDK (ARMV4I)"
-			OutputDirectory="$(PlatformName)\$(ConfigurationName)"
-			IntermediateDirectory="$(PlatformName)\$(ConfigurationName)"
+			Name="Debug|STANDARDSDK_500 (x86)"
+			OutputDirectory="STANDARDSDK_500 (x86)\$(ConfigurationName)"
+			IntermediateDirectory="STANDARDSDK_500 (x86)\$(ConfigurationName)"
 			ConfigurationType="4"
 			InheritedPropertySheets="$(VCInstallDir)VCProjectDefaults\UpgradeFromVC60.vsprops"
 			UseOfMFC="0"
@@ -810,6 +812,7 @@
 			/>
 			<Tool
 				Name="VCMIDLTool"
+				TargetEnvironment="1"
 				TypeLibraryName="$(PlatformName)\$(ConfigurationName)/queen.tlb"
 				HeaderFileName=""
 			/>
@@ -817,8 +820,178 @@
 				Name="VCCLCompilerTool"
 				ExecutionBucket="7"
 				Optimization="0"
-				AdditionalIncludeDirectories="../../../,../../../common/,../../../backends/wince/,../../../backends/wince/missing/,../../../backends/wince/CEgui,../../../backends/wince/CEkeys"
-				PreprocessorDefinitions="_LIB;DISABLE_SWORD1;DEBUG;_WIN32_WCE=$(CEVER);$(CePlatform);ARM;_ARM_;ARMV4;UNDER_CE=$(CEVER);UNICODE;SCUMM_NEED_ALIGNMENT;FPM_DEFAULT;USE_MAD;NONSTANDARD_PORT;USE_VORBIS;USE_TREMOR;USE_MPEG2;WIN32;DISABLE_KYRA;USE_ZLIB;USE_WINDBG"
+				AdditionalIncludeDirectories="../../../,../../../common/,../../../backends/platform/wince/,../../../backends/platform/wince/missing/,../../../backends/platform/wince/CEgui,../../../backends/platform/wince/CEkeys,../../../engines,../../../backends/platform/wince/missing/libinclude,"
+				PreprocessorDefinitions="USE_WINDBG;DEBUG;_WIN32_WCE=$(CEVER);$(CePlatform);$(ARCHFAM);$(_ARCHFAM_);UNDER_CE=$(CEVER);UNICODE;SCUMM_NEED_ALIGNMENT;FPM_DEFAULT;USE_MAD;NONSTANDARD_PORT;USE_TREMOR;USE_VORBIS;USE_MPEG2;WIN32;DISABLE_SAGA;USE_ZLIB;USE_FLAC;DISABLE_AGI;DISABLE_LURE"
+				RuntimeLibrary="1"
+				UsePrecompiledHeader="0"
+				PrecompiledHeaderFile="$(PlatformName)\$(ConfigurationName)/queen.pch"
+				AssemblerListingLocation="$(PlatformName)\$(ConfigurationName)/"
+				ObjectFile="$(PlatformName)\$(ConfigurationName)/"
+				ProgramDataBaseFileName="$(PlatformName)\$(ConfigurationName)/"
+				WarningLevel="3"
+				SuppressStartupBanner="true"
+				DebugInformationFormat="3"
+			/>
+			<Tool
+				Name="VCManagedResourceCompilerTool"
+			/>
+			<Tool
+				Name="VCResourceCompilerTool"
+				Culture="1033"
+			/>
+			<Tool
+				Name="VCPreLinkEventTool"
+			/>
+			<Tool
+				Name="VCLibrarianTool"
+				OutputFile="$(PlatformName)\$(ConfigurationName)\queen.lib"
+			/>
+			<Tool
+				Name="VCALinkTool"
+			/>
+			<Tool
+				Name="VCXDCMakeTool"
+			/>
+			<Tool
+				Name="VCBscMakeTool"
+				SuppressStartupBanner="true"
+				OutputFile="$(PlatformName)\$(ConfigurationName)/queen.bsc"
+			/>
+			<Tool
+				Name="VCCodeSignTool"
+			/>
+			<Tool
+				Name="VCPostBuildEventTool"
+			/>
+			<DeploymentTool
+				ForceDirty="-1"
+				RemoteDirectory=""
+				RegisterOutput="0"
+				AdditionalFiles=""
+			/>
+			<DebuggerTool
+			/>
+		</Configuration>
+		<Configuration
+			Name="Release|PMP2500 (MIPSII)"
+			OutputDirectory="PMP2500 (MIPSII)\$(ConfigurationName)"
+			IntermediateDirectory="PMP2500 (MIPSII)\$(ConfigurationName)"
+			ConfigurationType="4"
+			InheritedPropertySheets="$(VCInstallDir)VCProjectDefaults\UpgradeFromVC60.vsprops"
+			UseOfMFC="0"
+			ATLMinimizesCRunTimeLibraryUsage="false"
+			CharacterSet="1"
+			>
+			<Tool
+				Name="VCPreBuildEventTool"
+			/>
+			<Tool
+				Name="VCCustomBuildTool"
+			/>
+			<Tool
+				Name="VCXMLDataGeneratorTool"
+			/>
+			<Tool
+				Name="VCWebServiceProxyGeneratorTool"
+			/>
+			<Tool
+				Name="VCMIDLTool"
+				TargetEnvironment="1"
+				TypeLibraryName="$(PlatformName)\$(ConfigurationName)/queen.tlb"
+				HeaderFileName=""
+			/>
+			<Tool
+				Name="VCCLCompilerTool"
+				ExecutionBucket="7"
+				Optimization="2"
+				InlineFunctionExpansion="1"
+				AdditionalIncludeDirectories="../../../,../../../common/,../../../backends/platform/wince/,../../../backends/platform/wince/missing/,../../../backends/platform/wince/CEgui,../../../backends/platform/wince/CEkeys,../../../engines,../../../backends/platform/wince/missing/libinclude,"
+				PreprocessorDefinitions="NDEBUG;_WIN32_WCE=$(CEVER);$(CePlatform);WIN32;$(ARCHFAM);$(_ARCHFAM_);UNDER_CE=$(CEVER);UNICODE;SCUMM_NEED_ALIGNMENT;FPM_DEFAULT;NONSTANDARD_PORT;USE_MAD;USE_VORBIS;USE_TREMOR;USE_MPEG2;USE_FLAC;USE_ZLIB;USE_KOREAN_V1;DISABLE_SMUSHREDRAW"
+				StringPooling="true"
+				RuntimeLibrary="0"
+				EnableFunctionLevelLinking="true"
+				UsePrecompiledHeader="0"
+				PrecompiledHeaderFile="$(PlatformName)\$(ConfigurationName)/queen.pch"
+				AssemblerListingLocation="$(PlatformName)\$(ConfigurationName)/"
+				ObjectFile="$(PlatformName)\$(ConfigurationName)/"
+				ProgramDataBaseFileName="$(PlatformName)\$(ConfigurationName)/"
+				WarningLevel="3"
+				SuppressStartupBanner="true"
+			/>
+			<Tool
+				Name="VCManagedResourceCompilerTool"
+			/>
+			<Tool
+				Name="VCResourceCompilerTool"
+				Culture="1033"
+			/>
+			<Tool
+				Name="VCPreLinkEventTool"
+			/>
+			<Tool
+				Name="VCLibrarianTool"
+				OutputFile="$(PlatformName)\$(ConfigurationName)\queen.lib"
+			/>
+			<Tool
+				Name="VCALinkTool"
+			/>
+			<Tool
+				Name="VCXDCMakeTool"
+			/>
+			<Tool
+				Name="VCBscMakeTool"
+				SuppressStartupBanner="true"
+				OutputFile="$(PlatformName)\$(ConfigurationName)/queen.bsc"
+			/>
+			<Tool
+				Name="VCCodeSignTool"
+			/>
+			<Tool
+				Name="VCPostBuildEventTool"
+			/>
+			<DeploymentTool
+				ForceDirty="-1"
+				RemoteDirectory=""
+				RegisterOutput="0"
+				AdditionalFiles=""
+			/>
+			<DebuggerTool
+			/>
+		</Configuration>
+		<Configuration
+			Name="Debug|PMP2500 (MIPSII)"
+			OutputDirectory="PMP2500 (MIPSII)\$(ConfigurationName)"
+			IntermediateDirectory="PMP2500 (MIPSII)\$(ConfigurationName)"
+			ConfigurationType="4"
+			InheritedPropertySheets="$(VCInstallDir)VCProjectDefaults\UpgradeFromVC60.vsprops"
+			UseOfMFC="0"
+			ATLMinimizesCRunTimeLibraryUsage="false"
+			CharacterSet="1"
+			>
+			<Tool
+				Name="VCPreBuildEventTool"
+			/>
+			<Tool
+				Name="VCCustomBuildTool"
+			/>
+			<Tool
+				Name="VCXMLDataGeneratorTool"
+			/>
+			<Tool
+				Name="VCWebServiceProxyGeneratorTool"
+			/>
+			<Tool
+				Name="VCMIDLTool"
+				TargetEnvironment="1"
+				TypeLibraryName="$(PlatformName)\$(ConfigurationName)/queen.tlb"
+				HeaderFileName=""
+			/>
+			<Tool
+				Name="VCCLCompilerTool"
+				ExecutionBucket="7"
+				Optimization="0"
+				AdditionalIncludeDirectories="../../../,../../../common/,../../../backends/platform/wince/,../../../backends/platform/wince/missing/,../../../backends/platform/wince/CEgui,../../../backends/platform/wince/CEkeys,../../../engines,../../../backends/platform/wince/missing/libinclude,"
+				PreprocessorDefinitions="DEBUG;_DEBUG;_WIN32_WCE=$(CEVER);UNDER_CE;WINCE;WIN32;_LIB;$(ARCHFAM);$(_ARCHFAM_);_UNICODE;UNICODE;USE_WINDBG;SCUMM_NEED_ALIGNMENT;FPM_DEFAULT;NONSTANDARD_PORT;USE_MAD;USE_VORBIS;USE_TREMOR;USE_MPEG2;USE_FLAC;USE_ZLIB;USE_KOREAN_V1;DISABLE_SMUSHREDRAW"
 				RuntimeLibrary="1"
 				UsePrecompiledHeader="0"
 				PrecompiledHeaderFile="$(PlatformName)\$(ConfigurationName)/queen.pch"

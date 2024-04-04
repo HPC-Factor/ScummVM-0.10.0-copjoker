@@ -13,13 +13,16 @@
 			Name="Pocket PC 2003 (ARMV4)"
 		/>
 		<Platform
-			Name="PMP2500 (MIPSII)"
-		/>
-		<Platform
 			Name="STANDARDSDK_500 (MIPSII)"
 		/>
 		<Platform
 			Name="Windows Mobile 5.0 Pocket PC SDK (ARMV4I)"
+		/>
+		<Platform
+			Name="STANDARDSDK_500 (x86)"
+		/>
+		<Platform
+			Name="PMP2500 (MIPSII)"
 		/>
 	</Platforms>
 	<ToolFiles>
@@ -232,9 +235,9 @@
 			/>
 		</Configuration>
 		<Configuration
-			Name="Release|PMP2500 (MIPSII)"
-			OutputDirectory="PMP2500 (MIPSII)\$(ConfigurationName)"
-			IntermediateDirectory="PMP2500 (MIPSII)\$(ConfigurationName)"
+			Name="Release|STANDARDSDK_500 (MIPSII)"
+			OutputDirectory="STANDARDSDK_500 (MIPSII)\$(ConfigurationName)"
+			IntermediateDirectory="STANDARDSDK_500 (MIPSII)\$(ConfigurationName)"
 			ConfigurationType="1"
 			InheritedPropertySheets="$(VCInstallDir)VCProjectDefaults\UpgradeFromVC60.vsprops"
 			UseOfMFC="0"
@@ -268,7 +271,7 @@
 				Optimization="2"
 				InlineFunctionExpansion="1"
 				AdditionalIncludeDirectories="../../../,../../../common/,../../../backends/platform/wince/,../../../backends/platform/wince/missing/,../../../backends/platform/wince/CEgui,../../../backends/platform/wince/CEkeys,../../../engines,../../../backends/platform/wince/missing/libinclude,"
-				PreprocessorDefinitions="NDEBUG;_WIN32_WCE=$(CEVER);$(CePlatform);WIN32;$(ARCHFAM);$(_ARCHFAM_);UNDER_CE=$(CEVER);UNICODE;SCUMM_NEED_ALIGNMENT;FPM_DEFAULT;NONSTANDARD_PORT;USE_MAD;USE_VORBIS;USE_TREMOR;USE_MPEG2;USE_FLAC;USE_ZLIB;DISABLE_TAPWAVE;USE_KOREAN_V1;DISABLE_SMUSHREDRAW"
+				PreprocessorDefinitions="_WIN32_WCE=$(CEVER);$(CePlatform);NDEBUG;$(ARCHFAM);$(_ARCHFAM_);UNDER_CE=$(CEVER);UNICODE;SCUMM_NEED_ALIGNMENT;FPM_DEFAULT;USE_MAD;NONSTANDARD_PORT;USE_VORBIS;USE_TREMOR;USE_MPEG2;WIN32;DISABLE_SAGA;USE_ZLIB;USE_FLAC;DISABLE_AGI;DISABLE_LURE;DISABLE_CINE;DISABLE_TAPWAVE"
 				StringPooling="true"
 				RuntimeLibrary="0"
 				EnableFunctionLevelLinking="true"
@@ -330,7 +333,108 @@
 			/>
 			<DeploymentTool
 				ForceDirty="-1"
-				RemoteDirectory="\&#54616;&#46300; &#46356;&#49828;&#53356;\ScummVM"
+				RemoteDirectory=""
+				RegisterOutput="0"
+				AdditionalFiles=""
+			/>
+			<DebuggerTool
+			/>
+		</Configuration>
+		<Configuration
+			Name="Release|Windows Mobile 5.0 Pocket PC SDK (ARMV4I)"
+			OutputDirectory="$(PlatformName)\$(ConfigurationName)"
+			IntermediateDirectory="$(PlatformName)\$(ConfigurationName)"
+			ConfigurationType="1"
+			InheritedPropertySheets="$(VCInstallDir)VCProjectDefaults\UpgradeFromVC60.vsprops"
+			UseOfMFC="0"
+			ATLMinimizesCRunTimeLibraryUsage="false"
+			CharacterSet="1"
+			>
+			<Tool
+				Name="VCPreBuildEventTool"
+			/>
+			<Tool
+				Name="VCCustomBuildTool"
+			/>
+			<Tool
+				Name="VCXMLDataGeneratorTool"
+			/>
+			<Tool
+				Name="VCWebServiceProxyGeneratorTool"
+			/>
+			<Tool
+				Name="VCMIDLTool"
+				PreprocessorDefinitions="NDEBUG"
+				MkTypLibCompatible="true"
+				SuppressStartupBanner="true"
+				TargetEnvironment="1"
+				TypeLibraryName="$(PlatformName)\$(ConfigurationName)/scummvm.tlb"
+				HeaderFileName=""
+			/>
+			<Tool
+				Name="VCCLCompilerTool"
+				ExecutionBucket="7"
+				Optimization="2"
+				InlineFunctionExpansion="1"
+				AdditionalIncludeDirectories="../../../,../../../common/,../../../backends/wince/,../../../backends/wince/missing/,../../../backends/wince/CEgui,../../../backends/wince/CEkeys"
+				PreprocessorDefinitions="_WIN32_WCE=$(CEVER);$(CePlatform);NDEBUG;ARM;_ARM_;ARMV4;UNDER_CE=$(CEVER);UNICODE;SCUMM_NEED_ALIGNMENT;FPM_DEFAULT;USE_MAD;NONSTANDARD_PORT;USE_VORBIS;USE_TREMOR;WIN32;DISABLE_KYRA;USE_MPEG2;USE_ZLIB"
+				StringPooling="true"
+				RuntimeLibrary="0"
+				EnableFunctionLevelLinking="true"
+				UsePrecompiledHeader="0"
+				PrecompiledHeaderFile="$(PlatformName)\$(ConfigurationName)/scummvm.pch"
+				AssemblerListingLocation="$(PlatformName)\$(ConfigurationName)/"
+				ObjectFile="$(PlatformName)\$(ConfigurationName)/"
+				ProgramDataBaseFileName="$(PlatformName)\$(ConfigurationName)/"
+				WarningLevel="3"
+				SuppressStartupBanner="true"
+			/>
+			<Tool
+				Name="VCManagedResourceCompilerTool"
+			/>
+			<Tool
+				Name="VCResourceCompilerTool"
+				AdditionalOptions="/r "
+				PreprocessorDefinitions="UNDER_CE=$(CEVER),_WIN32_WCE=$(CEVER),NDEBUG,UNICODE,_UNICODE,$(CePlatform),ARM,_ARM_,ARMV4"
+				Culture="1033"
+			/>
+			<Tool
+				Name="VCPreLinkEventTool"
+			/>
+			<Tool
+				Name="VCLinkerTool"
+				AdditionalOptions="/ALIGN:4096 /subsystem:$(CESubsystem)  "
+				AdditionalDependencies="commctrl.lib coredll.lib aygshell.lib mad.lib sdl.lib LibTremorCE.lib libmpeg2.lib zlib.lib"
+				OutputFile="bin/ARMV4Rel/PocketSCUMM.exe"
+				LinkIncremental="1"
+				SuppressStartupBanner="true"
+				IgnoreDefaultLibraryNames="$(CENoDefaultLib)"
+				ProgramDatabaseFile="$(PlatformName)\$(ConfigurationName)/PocketSCUMM.pdb"
+				StackReserveSize="65536"
+				StackCommitSize="4096"
+				EntryPointSymbol="WinMainCRTStartup"
+				BaseAddress="0x00010000"
+			/>
+			<Tool
+				Name="VCALinkTool"
+			/>
+			<Tool
+				Name="VCXDCMakeTool"
+			/>
+			<Tool
+				Name="VCBscMakeTool"
+				SuppressStartupBanner="true"
+				OutputFile="$(PlatformName)\$(ConfigurationName)/scummvm.bsc"
+			/>
+			<Tool
+				Name="VCCodeSignTool"
+			/>
+			<Tool
+				Name="VCPostBuildEventTool"
+			/>
+			<DeploymentTool
+				ForceDirty="-1"
+				RemoteDirectory=""
 				RegisterOutput="0"
 				AdditionalFiles=""
 			/>
@@ -542,215 +646,6 @@
 			/>
 		</Configuration>
 		<Configuration
-			Name="Debug|PMP2500 (MIPSII)"
-			OutputDirectory="PMP2500 (MIPSII)\$(ConfigurationName)"
-			IntermediateDirectory="PMP2500 (MIPSII)\$(ConfigurationName)"
-			ConfigurationType="1"
-			InheritedPropertySheets="$(VCInstallDir)VCProjectDefaults\UpgradeFromVC60.vsprops"
-			UseOfMFC="0"
-			ATLMinimizesCRunTimeLibraryUsage="false"
-			CharacterSet="1"
-			>
-			<Tool
-				Name="VCPreBuildEventTool"
-			/>
-			<Tool
-				Name="VCCustomBuildTool"
-			/>
-			<Tool
-				Name="VCXMLDataGeneratorTool"
-			/>
-			<Tool
-				Name="VCWebServiceProxyGeneratorTool"
-			/>
-			<Tool
-				Name="VCMIDLTool"
-				PreprocessorDefinitions="_DEBUG"
-				MkTypLibCompatible="true"
-				SuppressStartupBanner="true"
-				TargetEnvironment="1"
-				TypeLibraryName="$(PlatformName)\$(ConfigurationName)/scummvm.tlb"
-				HeaderFileName=""
-			/>
-			<Tool
-				Name="VCCLCompilerTool"
-				ExecutionBucket="7"
-				Optimization="0"
-				AdditionalIncludeDirectories="../../../,../../../common/,../../../backends/platform/wince/,../../../backends/platform/wince/missing/,../../../backends/platform/wince/CEgui,../../../backends/platform/wince/CEkeys,../../../engines,../../../backends/platform/wince/missing/libinclude,"
-				PreprocessorDefinitions="DEBUG;_WIN32_WCE=$(CEVER);$(CePlatform);WIN32;$(ARCHFAM);$(_ARCHFAM_);UNDER_CE=$(CEVER);UNICODE;USE_WINDBG;SCUMM_NEED_ALIGNMENT;FPM_DEFAULT;NONSTANDARD_PORT;USE_MAD;USE_TREMOR;USE_VORBIS;USE_MPEG2;USE_FLAC;USE_ZLIB;DISABLE_TAPWAVE;USE_KOREAN_V1;DISABLE_SMUSHREDRAW"
-				RuntimeLibrary="1"
-				UsePrecompiledHeader="0"
-				PrecompiledHeaderFile="$(PlatformName)\$(ConfigurationName)/scummvm.pch"
-				AssemblerListingLocation="$(PlatformName)\$(ConfigurationName)/"
-				ObjectFile="$(PlatformName)\$(ConfigurationName)/"
-				ProgramDataBaseFileName="$(PlatformName)\$(ConfigurationName)/"
-				BrowseInformation="1"
-				WarningLevel="3"
-				SuppressStartupBanner="true"
-				DebugInformationFormat="3"
-			/>
-			<Tool
-				Name="VCManagedResourceCompilerTool"
-			/>
-			<Tool
-				Name="VCResourceCompilerTool"
-				AdditionalOptions="/r "
-				PreprocessorDefinitions="UNDER_CE=$(CEVER),_WIN32_WCE=$(CEVER),DEBUG,UNICODE,_UNICODE,$(CePlatform),ARM,_ARM_,ARMV4"
-				Culture="1033"
-			/>
-			<Tool
-				Name="VCPreLinkEventTool"
-			/>
-			<Tool
-				Name="VCLinkerTool"
-				AdditionalOptions="/ALIGN:4096 /subsystem:$(CESubsystem) /MACHINE:MIPS "
-				AdditionalDependencies="commctrl.lib coredll.lib aygshell.lib sdl.lib sdlmain.lib libmpeg2.lib zlib.lib libflac.lib libmad.lib libTremor.lib"
-				OutputFile="$(PlatformName)\$(ConfigurationName)/ScummVMS43D.exe"
-				LinkIncremental="2"
-				SuppressStartupBanner="true"
-				AdditionalLibraryDirectories=""
-				IgnoreDefaultLibraryNames="$(CENoDefaultLib)"
-				GenerateDebugInformation="true"
-				ProgramDatabaseFile="$(PlatformName)\$(ConfigurationName)/scummvm.pdb"
-				StackReserveSize="65536"
-				StackCommitSize="4096"
-				EntryPointSymbol="WinMainCRTStartup"
-				BaseAddress="0x00010000"
-				TargetMachine="0"
-			/>
-			<Tool
-				Name="VCALinkTool"
-			/>
-			<Tool
-				Name="VCXDCMakeTool"
-			/>
-			<Tool
-				Name="VCBscMakeTool"
-				SuppressStartupBanner="true"
-				OutputFile="$(PlatformName)\$(ConfigurationName)/scummvm.bsc"
-			/>
-			<Tool
-				Name="VCCodeSignTool"
-			/>
-			<Tool
-				Name="VCPostBuildEventTool"
-			/>
-			<DeploymentTool
-				ForceDirty="-1"
-				RemoteDirectory="\&#54616;&#46300; &#46356;&#49828;&#53356;\ScummVM"
-				RegisterOutput="0"
-				AdditionalFiles=""
-			/>
-			<DebuggerTool
-			/>
-		</Configuration>
-		<Configuration
-			Name="Release|STANDARDSDK_500 (MIPSII)"
-			OutputDirectory="STANDARDSDK_500 (MIPSII)\$(ConfigurationName)"
-			IntermediateDirectory="STANDARDSDK_500 (MIPSII)\$(ConfigurationName)"
-			ConfigurationType="1"
-			InheritedPropertySheets="$(VCInstallDir)VCProjectDefaults\UpgradeFromVC60.vsprops"
-			UseOfMFC="0"
-			ATLMinimizesCRunTimeLibraryUsage="false"
-			CharacterSet="1"
-			>
-			<Tool
-				Name="VCPreBuildEventTool"
-			/>
-			<Tool
-				Name="VCCustomBuildTool"
-			/>
-			<Tool
-				Name="VCXMLDataGeneratorTool"
-			/>
-			<Tool
-				Name="VCWebServiceProxyGeneratorTool"
-			/>
-			<Tool
-				Name="VCMIDLTool"
-				PreprocessorDefinitions="NDEBUG"
-				MkTypLibCompatible="true"
-				SuppressStartupBanner="true"
-				TargetEnvironment="1"
-				TypeLibraryName="$(PlatformName)\$(ConfigurationName)/scummvm.tlb"
-				HeaderFileName=""
-			/>
-			<Tool
-				Name="VCCLCompilerTool"
-				ExecutionBucket="7"
-				Optimization="2"
-				InlineFunctionExpansion="1"
-				AdditionalIncludeDirectories="../../../,../../../common/,../../../backends/platform/wince/,../../../backends/platform/wince/missing/,../../../backends/platform/wince/CEgui,../../../backends/platform/wince/CEkeys,../../../engines,../../../backends/platform/wince/missing/libinclude,"
-				PreprocessorDefinitions="_WIN32_WCE=$(CEVER);$(CePlatform);NDEBUG;$(ARCHFAM);$(_ARCHFAM_);UNDER_CE=$(CEVER);UNICODE;SCUMM_NEED_ALIGNMENT;FPM_DEFAULT;USE_MAD;NONSTANDARD_PORT;USE_VORBIS;USE_TREMOR;USE_MPEG2;WIN32;DISABLE_SAGA;USE_ZLIB;USE_FLAC;DISABLE_AGI;DISABLE_LURE;DISABLE_CINE;DISABLE_TAPWAVE"
-				StringPooling="true"
-				RuntimeLibrary="0"
-				EnableFunctionLevelLinking="true"
-				UsePrecompiledHeader="0"
-				PrecompiledHeaderFile="$(PlatformName)\$(ConfigurationName)/scummvm.pch"
-				AssemblerListingLocation="$(PlatformName)\$(ConfigurationName)/"
-				ObjectFile="$(PlatformName)\$(ConfigurationName)/"
-				ProgramDataBaseFileName="$(PlatformName)\$(ConfigurationName)/"
-				WarningLevel="3"
-				SuppressStartupBanner="true"
-			/>
-			<Tool
-				Name="VCManagedResourceCompilerTool"
-			/>
-			<Tool
-				Name="VCResourceCompilerTool"
-				AdditionalOptions="/r "
-				PreprocessorDefinitions="UNDER_CE=$(CEVER),_WIN32_WCE=$(CEVER),NDEBUG,UNICODE,_UNICODE,$(CePlatform),ARM,_ARM_,ARMV4"
-				Culture="1033"
-			/>
-			<Tool
-				Name="VCPreLinkEventTool"
-			/>
-			<Tool
-				Name="VCLinkerTool"
-				AdditionalOptions="/ALIGN:4096 /subsystem:$(CESubsystem) /MACHINE:MIPS"
-				AdditionalDependencies="commctrl.lib coredll.lib aygshell.lib sdl.lib sdlmain.lib libmpeg2.lib zlib.lib libflac.lib libmad.lib libTremor.lib"
-				OutputFile="$(PlatformName)\$(ConfigurationName)/ScummVMS43.exe"
-				LinkIncremental="1"
-				SuppressStartupBanner="true"
-				AdditionalLibraryDirectories=""
-				IgnoreDefaultLibraryNames="$(CENoDefaultLib)"
-				GenerateDebugInformation="false"
-				ProgramDatabaseFile="$(PlatformName)\$(ConfigurationName)/PocketSCUMM.pdb"
-				GenerateMapFile="true"
-				MapFileName="scummvm.map"
-				StackReserveSize="65536"
-				StackCommitSize="4096"
-				EntryPointSymbol="WinMainCRTStartup"
-				BaseAddress="0x00010000"
-				TargetMachine="0"
-			/>
-			<Tool
-				Name="VCALinkTool"
-			/>
-			<Tool
-				Name="VCXDCMakeTool"
-			/>
-			<Tool
-				Name="VCBscMakeTool"
-				SuppressStartupBanner="true"
-				OutputFile="$(PlatformName)\$(ConfigurationName)/scummvm.bsc"
-			/>
-			<Tool
-				Name="VCCodeSignTool"
-			/>
-			<Tool
-				Name="VCPostBuildEventTool"
-			/>
-			<DeploymentTool
-				ForceDirty="-1"
-				RemoteDirectory=""
-				RegisterOutput="0"
-				AdditionalFiles=""
-			/>
-			<DebuggerTool
-			/>
-		</Configuration>
-		<Configuration
 			Name="Debug|STANDARDSDK_500 (MIPSII)"
 			OutputDirectory="STANDARDSDK_500 (MIPSII)\$(ConfigurationName)"
 			IntermediateDirectory="STANDARDSDK_500 (MIPSII)\$(ConfigurationName)"
@@ -826,107 +721,6 @@
 				EntryPointSymbol="WinMainCRTStartup"
 				BaseAddress="0x00010000"
 				TargetMachine="0"
-			/>
-			<Tool
-				Name="VCALinkTool"
-			/>
-			<Tool
-				Name="VCXDCMakeTool"
-			/>
-			<Tool
-				Name="VCBscMakeTool"
-				SuppressStartupBanner="true"
-				OutputFile="$(PlatformName)\$(ConfigurationName)/scummvm.bsc"
-			/>
-			<Tool
-				Name="VCCodeSignTool"
-			/>
-			<Tool
-				Name="VCPostBuildEventTool"
-			/>
-			<DeploymentTool
-				ForceDirty="-1"
-				RemoteDirectory=""
-				RegisterOutput="0"
-				AdditionalFiles=""
-			/>
-			<DebuggerTool
-			/>
-		</Configuration>
-		<Configuration
-			Name="Release|Windows Mobile 5.0 Pocket PC SDK (ARMV4I)"
-			OutputDirectory="$(PlatformName)\$(ConfigurationName)"
-			IntermediateDirectory="$(PlatformName)\$(ConfigurationName)"
-			ConfigurationType="1"
-			InheritedPropertySheets="$(VCInstallDir)VCProjectDefaults\UpgradeFromVC60.vsprops"
-			UseOfMFC="0"
-			ATLMinimizesCRunTimeLibraryUsage="false"
-			CharacterSet="1"
-			>
-			<Tool
-				Name="VCPreBuildEventTool"
-			/>
-			<Tool
-				Name="VCCustomBuildTool"
-			/>
-			<Tool
-				Name="VCXMLDataGeneratorTool"
-			/>
-			<Tool
-				Name="VCWebServiceProxyGeneratorTool"
-			/>
-			<Tool
-				Name="VCMIDLTool"
-				PreprocessorDefinitions="NDEBUG"
-				MkTypLibCompatible="true"
-				SuppressStartupBanner="true"
-				TargetEnvironment="1"
-				TypeLibraryName="$(PlatformName)\$(ConfigurationName)/scummvm.tlb"
-				HeaderFileName=""
-			/>
-			<Tool
-				Name="VCCLCompilerTool"
-				ExecutionBucket="7"
-				Optimization="2"
-				InlineFunctionExpansion="1"
-				AdditionalIncludeDirectories="../../../,../../../common/,../../../backends/wince/,../../../backends/wince/missing/,../../../backends/wince/CEgui,../../../backends/wince/CEkeys"
-				PreprocessorDefinitions="_WIN32_WCE=$(CEVER);$(CePlatform);NDEBUG;ARM;_ARM_;ARMV4;UNDER_CE=$(CEVER);UNICODE;SCUMM_NEED_ALIGNMENT;FPM_DEFAULT;USE_MAD;NONSTANDARD_PORT;USE_VORBIS;USE_TREMOR;WIN32;DISABLE_KYRA;USE_MPEG2;USE_ZLIB"
-				StringPooling="true"
-				RuntimeLibrary="0"
-				EnableFunctionLevelLinking="true"
-				UsePrecompiledHeader="0"
-				PrecompiledHeaderFile="$(PlatformName)\$(ConfigurationName)/scummvm.pch"
-				AssemblerListingLocation="$(PlatformName)\$(ConfigurationName)/"
-				ObjectFile="$(PlatformName)\$(ConfigurationName)/"
-				ProgramDataBaseFileName="$(PlatformName)\$(ConfigurationName)/"
-				WarningLevel="3"
-				SuppressStartupBanner="true"
-			/>
-			<Tool
-				Name="VCManagedResourceCompilerTool"
-			/>
-			<Tool
-				Name="VCResourceCompilerTool"
-				AdditionalOptions="/r "
-				PreprocessorDefinitions="UNDER_CE=$(CEVER),_WIN32_WCE=$(CEVER),NDEBUG,UNICODE,_UNICODE,$(CePlatform),ARM,_ARM_,ARMV4"
-				Culture="1033"
-			/>
-			<Tool
-				Name="VCPreLinkEventTool"
-			/>
-			<Tool
-				Name="VCLinkerTool"
-				AdditionalOptions="/ALIGN:4096 /subsystem:$(CESubsystem)  "
-				AdditionalDependencies="commctrl.lib coredll.lib aygshell.lib mad.lib sdl.lib LibTremorCE.lib libmpeg2.lib zlib.lib"
-				OutputFile="bin/ARMV4Rel/PocketSCUMM.exe"
-				LinkIncremental="1"
-				SuppressStartupBanner="true"
-				IgnoreDefaultLibraryNames="$(CENoDefaultLib)"
-				ProgramDatabaseFile="$(PlatformName)\$(ConfigurationName)/PocketSCUMM.pdb"
-				StackReserveSize="65536"
-				StackCommitSize="4096"
-				EntryPointSymbol="WinMainCRTStartup"
-				BaseAddress="0x00010000"
 			/>
 			<Tool
 				Name="VCALinkTool"
@@ -1055,6 +849,424 @@
 			<DebuggerTool
 			/>
 		</Configuration>
+		<Configuration
+			Name="Release|STANDARDSDK_500 (x86)"
+			OutputDirectory="STANDARDSDK_500 (x86)\$(ConfigurationName)"
+			IntermediateDirectory="STANDARDSDK_500 (x86)\$(ConfigurationName)"
+			ConfigurationType="1"
+			InheritedPropertySheets="$(VCInstallDir)VCProjectDefaults\UpgradeFromVC60.vsprops"
+			UseOfMFC="0"
+			ATLMinimizesCRunTimeLibraryUsage="false"
+			CharacterSet="1"
+			>
+			<Tool
+				Name="VCPreBuildEventTool"
+			/>
+			<Tool
+				Name="VCCustomBuildTool"
+			/>
+			<Tool
+				Name="VCXMLDataGeneratorTool"
+			/>
+			<Tool
+				Name="VCWebServiceProxyGeneratorTool"
+			/>
+			<Tool
+				Name="VCMIDLTool"
+				PreprocessorDefinitions="NDEBUG"
+				MkTypLibCompatible="true"
+				SuppressStartupBanner="true"
+				TargetEnvironment="1"
+				TypeLibraryName="$(PlatformName)\$(ConfigurationName)/scummvm.tlb"
+				HeaderFileName=""
+			/>
+			<Tool
+				Name="VCCLCompilerTool"
+				ExecutionBucket="7"
+				Optimization="2"
+				InlineFunctionExpansion="1"
+				AdditionalIncludeDirectories="../../../,../../../common/,../../../backends/platform/wince/,../../../backends/platform/wince/missing/,../../../backends/platform/wince/CEgui,../../../backends/platform/wince/CEkeys,../../../engines,../../../backends/platform/wince/missing/libinclude,"
+				PreprocessorDefinitions="_WIN32_WCE=$(CEVER);$(CePlatform);NDEBUG;$(ARCHFAM);$(_ARCHFAM_);UNDER_CE=$(CEVER);UNICODE;SCUMM_NEED_ALIGNMENT;FPM_DEFAULT;USE_MAD;NONSTANDARD_PORT;USE_VORBIS;USE_TREMOR;USE_MPEG2;WIN32;DISABLE_SAGA;USE_ZLIB;USE_FLAC;DISABLE_AGI;DISABLE_LURE;DISABLE_CINE;DISABLE_TAPWAVE"
+				StringPooling="true"
+				RuntimeLibrary="0"
+				EnableFunctionLevelLinking="true"
+				UsePrecompiledHeader="0"
+				PrecompiledHeaderFile="$(PlatformName)\$(ConfigurationName)/scummvm.pch"
+				AssemblerListingLocation="$(PlatformName)\$(ConfigurationName)/"
+				ObjectFile="$(PlatformName)\$(ConfigurationName)/"
+				ProgramDataBaseFileName="$(PlatformName)\$(ConfigurationName)/"
+				WarningLevel="3"
+				SuppressStartupBanner="true"
+			/>
+			<Tool
+				Name="VCManagedResourceCompilerTool"
+			/>
+			<Tool
+				Name="VCResourceCompilerTool"
+				AdditionalOptions="/r "
+				PreprocessorDefinitions="UNDER_CE=$(CEVER),_WIN32_WCE=$(CEVER),NDEBUG,UNICODE,_UNICODE,$(CePlatform),ARM,_ARM_,ARMV4"
+				Culture="1033"
+			/>
+			<Tool
+				Name="VCPreLinkEventTool"
+			/>
+			<Tool
+				Name="VCLinkerTool"
+				AdditionalOptions="/ALIGN:4096 /subsystem:$(CESubsystem) /MACHINE:MIPS"
+				AdditionalDependencies="commctrl.lib coredll.lib aygshell.lib sdl.lib sdlmain.lib libmpeg2.lib zlib.lib libflac.lib libmad.lib libTremor.lib"
+				OutputFile="$(PlatformName)\$(ConfigurationName)/ScummVMS43.exe"
+				LinkIncremental="1"
+				SuppressStartupBanner="true"
+				AdditionalLibraryDirectories=""
+				IgnoreDefaultLibraryNames="$(CENoDefaultLib)"
+				GenerateDebugInformation="false"
+				ProgramDatabaseFile="$(PlatformName)\$(ConfigurationName)/PocketSCUMM.pdb"
+				GenerateMapFile="true"
+				MapFileName="scummvm.map"
+				StackReserveSize="65536"
+				StackCommitSize="4096"
+				EntryPointSymbol="WinMainCRTStartup"
+				BaseAddress="0x00010000"
+				TargetMachine="0"
+			/>
+			<Tool
+				Name="VCALinkTool"
+			/>
+			<Tool
+				Name="VCXDCMakeTool"
+			/>
+			<Tool
+				Name="VCBscMakeTool"
+				SuppressStartupBanner="true"
+				OutputFile="$(PlatformName)\$(ConfigurationName)/scummvm.bsc"
+			/>
+			<Tool
+				Name="VCCodeSignTool"
+			/>
+			<Tool
+				Name="VCPostBuildEventTool"
+			/>
+			<DeploymentTool
+				ForceDirty="-1"
+				RemoteDirectory=""
+				RegisterOutput="0"
+				AdditionalFiles=""
+			/>
+			<DebuggerTool
+			/>
+		</Configuration>
+		<Configuration
+			Name="Debug|STANDARDSDK_500 (x86)"
+			OutputDirectory="STANDARDSDK_500 (x86)\$(ConfigurationName)"
+			IntermediateDirectory="STANDARDSDK_500 (x86)\$(ConfigurationName)"
+			ConfigurationType="1"
+			InheritedPropertySheets="$(VCInstallDir)VCProjectDefaults\UpgradeFromVC60.vsprops"
+			UseOfMFC="0"
+			ATLMinimizesCRunTimeLibraryUsage="false"
+			CharacterSet="1"
+			>
+			<Tool
+				Name="VCPreBuildEventTool"
+			/>
+			<Tool
+				Name="VCCustomBuildTool"
+			/>
+			<Tool
+				Name="VCXMLDataGeneratorTool"
+			/>
+			<Tool
+				Name="VCWebServiceProxyGeneratorTool"
+			/>
+			<Tool
+				Name="VCMIDLTool"
+				PreprocessorDefinitions="_DEBUG"
+				MkTypLibCompatible="true"
+				SuppressStartupBanner="true"
+				TargetEnvironment="1"
+				TypeLibraryName="$(PlatformName)\$(ConfigurationName)/scummvm.tlb"
+				HeaderFileName=""
+			/>
+			<Tool
+				Name="VCCLCompilerTool"
+				ExecutionBucket="7"
+				Optimization="0"
+				AdditionalIncludeDirectories="../../../,../../../common/,../../../backends/platform/wince/,../../../backends/platform/wince/missing/,../../../backends/platform/wince/CEgui,../../../backends/platform/wince/CEkeys,../../../engines,../../../backends/platform/wince/missing/libinclude,"
+				PreprocessorDefinitions="USE_WINDBG;DEBUG;_WIN32_WCE=$(CEVER);$(CePlatform);$(ARCHFAM);$(_ARCHFAM_);UNDER_CE=$(CEVER);UNICODE;SCUMM_NEED_ALIGNMENT;FPM_DEFAULT;USE_MAD;NONSTANDARD_PORT;USE_TREMOR;USE_VORBIS;USE_MPEG2;WIN32;USE_ZLIB;USE_FLAC;DISABLE_TAPWAVE"
+				RuntimeLibrary="1"
+				UsePrecompiledHeader="0"
+				PrecompiledHeaderFile="$(PlatformName)\$(ConfigurationName)/scummvm.pch"
+				AssemblerListingLocation="$(PlatformName)\$(ConfigurationName)/"
+				ObjectFile="$(PlatformName)\$(ConfigurationName)/"
+				ProgramDataBaseFileName="$(PlatformName)\$(ConfigurationName)/"
+				BrowseInformation="1"
+				WarningLevel="3"
+				SuppressStartupBanner="true"
+				DebugInformationFormat="3"
+			/>
+			<Tool
+				Name="VCManagedResourceCompilerTool"
+			/>
+			<Tool
+				Name="VCResourceCompilerTool"
+				AdditionalOptions="/r "
+				PreprocessorDefinitions="UNDER_CE=$(CEVER),_WIN32_WCE=$(CEVER),DEBUG,UNICODE,_UNICODE,$(CePlatform),ARM,_ARM_,ARMV4"
+				Culture="1033"
+			/>
+			<Tool
+				Name="VCPreLinkEventTool"
+			/>
+			<Tool
+				Name="VCLinkerTool"
+				AdditionalOptions="/ALIGN:4096 /subsystem:$(CESubsystem) /MACHINE:MIPS "
+				AdditionalDependencies="commctrl.lib coredll.lib aygshell.lib sdl.lib sdlmain.lib libmpeg2.lib zlib.lib libflac.lib libmad.lib libTremor.lib"
+				OutputFile="$(PlatformName)\$(ConfigurationName)/ScummVMS43D.exe"
+				LinkIncremental="2"
+				SuppressStartupBanner="true"
+				AdditionalLibraryDirectories=""
+				IgnoreDefaultLibraryNames="$(CENoDefaultLib)"
+				GenerateDebugInformation="true"
+				ProgramDatabaseFile="$(PlatformName)\$(ConfigurationName)/scummvm.pdb"
+				StackReserveSize="65536"
+				StackCommitSize="4096"
+				EntryPointSymbol="WinMainCRTStartup"
+				BaseAddress="0x00010000"
+				TargetMachine="0"
+			/>
+			<Tool
+				Name="VCALinkTool"
+			/>
+			<Tool
+				Name="VCXDCMakeTool"
+			/>
+			<Tool
+				Name="VCBscMakeTool"
+				SuppressStartupBanner="true"
+				OutputFile="$(PlatformName)\$(ConfigurationName)/scummvm.bsc"
+			/>
+			<Tool
+				Name="VCCodeSignTool"
+			/>
+			<Tool
+				Name="VCPostBuildEventTool"
+			/>
+			<DeploymentTool
+				ForceDirty="-1"
+				RemoteDirectory=""
+				RegisterOutput="0"
+				AdditionalFiles=""
+			/>
+			<DebuggerTool
+			/>
+		</Configuration>
+		<Configuration
+			Name="Release|PMP2500 (MIPSII)"
+			OutputDirectory="PMP2500 (MIPSII)\$(ConfigurationName)"
+			IntermediateDirectory="PMP2500 (MIPSII)\$(ConfigurationName)"
+			ConfigurationType="1"
+			InheritedPropertySheets="$(VCInstallDir)VCProjectDefaults\UpgradeFromVC60.vsprops"
+			UseOfMFC="0"
+			ATLMinimizesCRunTimeLibraryUsage="false"
+			CharacterSet="1"
+			>
+			<Tool
+				Name="VCPreBuildEventTool"
+			/>
+			<Tool
+				Name="VCCustomBuildTool"
+			/>
+			<Tool
+				Name="VCXMLDataGeneratorTool"
+			/>
+			<Tool
+				Name="VCWebServiceProxyGeneratorTool"
+			/>
+			<Tool
+				Name="VCMIDLTool"
+				PreprocessorDefinitions="NDEBUG"
+				MkTypLibCompatible="true"
+				SuppressStartupBanner="true"
+				TargetEnvironment="1"
+				TypeLibraryName="$(PlatformName)\$(ConfigurationName)/scummvm.tlb"
+				HeaderFileName=""
+			/>
+			<Tool
+				Name="VCCLCompilerTool"
+				ExecutionBucket="7"
+				Optimization="2"
+				InlineFunctionExpansion="1"
+				AdditionalIncludeDirectories="../../../,../../../common/,../../../backends/platform/wince/,../../../backends/platform/wince/missing/,../../../backends/platform/wince/CEgui,../../../backends/platform/wince/CEkeys,../../../engines,../../../backends/platform/wince/missing/libinclude,"
+				PreprocessorDefinitions="NDEBUG;_WIN32_WCE=$(CEVER);$(CePlatform);WIN32;$(ARCHFAM);$(_ARCHFAM_);UNDER_CE=$(CEVER);UNICODE;SCUMM_NEED_ALIGNMENT;FPM_DEFAULT;NONSTANDARD_PORT;USE_MAD;USE_VORBIS;USE_TREMOR;USE_MPEG2;USE_FLAC;USE_ZLIB;DISABLE_TAPWAVE;USE_KOREAN_V1;DISABLE_SMUSHREDRAW"
+				StringPooling="true"
+				RuntimeLibrary="0"
+				EnableFunctionLevelLinking="true"
+				UsePrecompiledHeader="0"
+				PrecompiledHeaderFile="$(PlatformName)\$(ConfigurationName)/scummvm.pch"
+				AssemblerListingLocation="$(PlatformName)\$(ConfigurationName)/"
+				ObjectFile="$(PlatformName)\$(ConfigurationName)/"
+				ProgramDataBaseFileName="$(PlatformName)\$(ConfigurationName)/"
+				WarningLevel="3"
+				SuppressStartupBanner="true"
+			/>
+			<Tool
+				Name="VCManagedResourceCompilerTool"
+			/>
+			<Tool
+				Name="VCResourceCompilerTool"
+				AdditionalOptions="/r "
+				PreprocessorDefinitions="UNDER_CE=$(CEVER),_WIN32_WCE=$(CEVER),NDEBUG,UNICODE,_UNICODE,$(CePlatform),ARM,_ARM_,ARMV4"
+				Culture="1033"
+			/>
+			<Tool
+				Name="VCPreLinkEventTool"
+			/>
+			<Tool
+				Name="VCLinkerTool"
+				AdditionalOptions="/ALIGN:4096 /subsystem:$(CESubsystem) /MACHINE:MIPS"
+				AdditionalDependencies="commctrl.lib coredll.lib aygshell.lib sdl.lib sdlmain.lib libmpeg2.lib zlib.lib libflac.lib libmad.lib libTremor.lib"
+				OutputFile="$(PlatformName)\$(ConfigurationName)/ScummVMS43.exe"
+				LinkIncremental="1"
+				SuppressStartupBanner="true"
+				AdditionalLibraryDirectories=""
+				IgnoreDefaultLibraryNames="$(CENoDefaultLib)"
+				GenerateDebugInformation="false"
+				ProgramDatabaseFile="$(PlatformName)\$(ConfigurationName)/PocketSCUMM.pdb"
+				GenerateMapFile="true"
+				MapFileName="scummvm.map"
+				StackReserveSize="65536"
+				StackCommitSize="4096"
+				EntryPointSymbol="WinMainCRTStartup"
+				BaseAddress="0x00010000"
+				TargetMachine="0"
+			/>
+			<Tool
+				Name="VCALinkTool"
+			/>
+			<Tool
+				Name="VCXDCMakeTool"
+			/>
+			<Tool
+				Name="VCBscMakeTool"
+				SuppressStartupBanner="true"
+				OutputFile="$(PlatformName)\$(ConfigurationName)/scummvm.bsc"
+			/>
+			<Tool
+				Name="VCCodeSignTool"
+			/>
+			<Tool
+				Name="VCPostBuildEventTool"
+			/>
+			<DeploymentTool
+				ForceDirty="-1"
+				RemoteDirectory="\&#54616;&#46300; &#46356;&#49828;&#53356;\ScummVM"
+				RegisterOutput="0"
+				AdditionalFiles=""
+			/>
+			<DebuggerTool
+			/>
+		</Configuration>
+		<Configuration
+			Name="Debug|PMP2500 (MIPSII)"
+			OutputDirectory="PMP2500 (MIPSII)\$(ConfigurationName)"
+			IntermediateDirectory="PMP2500 (MIPSII)\$(ConfigurationName)"
+			ConfigurationType="1"
+			InheritedPropertySheets="$(VCInstallDir)VCProjectDefaults\UpgradeFromVC60.vsprops"
+			UseOfMFC="0"
+			ATLMinimizesCRunTimeLibraryUsage="false"
+			CharacterSet="1"
+			>
+			<Tool
+				Name="VCPreBuildEventTool"
+			/>
+			<Tool
+				Name="VCCustomBuildTool"
+			/>
+			<Tool
+				Name="VCXMLDataGeneratorTool"
+			/>
+			<Tool
+				Name="VCWebServiceProxyGeneratorTool"
+			/>
+			<Tool
+				Name="VCMIDLTool"
+				PreprocessorDefinitions="_DEBUG"
+				MkTypLibCompatible="true"
+				SuppressStartupBanner="true"
+				TargetEnvironment="1"
+				TypeLibraryName="$(PlatformName)\$(ConfigurationName)/scummvm.tlb"
+				HeaderFileName=""
+			/>
+			<Tool
+				Name="VCCLCompilerTool"
+				ExecutionBucket="7"
+				Optimization="0"
+				AdditionalIncludeDirectories="../../../,../../../common/,../../../backends/platform/wince/,../../../backends/platform/wince/missing/,../../../backends/platform/wince/CEgui,../../../backends/platform/wince/CEkeys,../../../engines,../../../backends/platform/wince/missing/libinclude,"
+				PreprocessorDefinitions="DEBUG;_WIN32_WCE=$(CEVER);$(CePlatform);WIN32;$(ARCHFAM);$(_ARCHFAM_);UNDER_CE=$(CEVER);UNICODE;USE_WINDBG;SCUMM_NEED_ALIGNMENT;FPM_DEFAULT;NONSTANDARD_PORT;USE_MAD;USE_TREMOR;USE_VORBIS;USE_MPEG2;USE_FLAC;USE_ZLIB;DISABLE_TAPWAVE;USE_KOREAN_V1;DISABLE_SMUSHREDRAW"
+				RuntimeLibrary="1"
+				UsePrecompiledHeader="0"
+				PrecompiledHeaderFile="$(PlatformName)\$(ConfigurationName)/scummvm.pch"
+				AssemblerListingLocation="$(PlatformName)\$(ConfigurationName)/"
+				ObjectFile="$(PlatformName)\$(ConfigurationName)/"
+				ProgramDataBaseFileName="$(PlatformName)\$(ConfigurationName)/"
+				BrowseInformation="1"
+				WarningLevel="3"
+				SuppressStartupBanner="true"
+				DebugInformationFormat="3"
+			/>
+			<Tool
+				Name="VCManagedResourceCompilerTool"
+			/>
+			<Tool
+				Name="VCResourceCompilerTool"
+				AdditionalOptions="/r "
+				PreprocessorDefinitions="UNDER_CE=$(CEVER),_WIN32_WCE=$(CEVER),DEBUG,UNICODE,_UNICODE,$(CePlatform),ARM,_ARM_,ARMV4"
+				Culture="1033"
+			/>
+			<Tool
+				Name="VCPreLinkEventTool"
+			/>
+			<Tool
+				Name="VCLinkerTool"
+				AdditionalOptions="/ALIGN:4096 /subsystem:$(CESubsystem) /MACHINE:MIPS "
+				AdditionalDependencies="commctrl.lib coredll.lib aygshell.lib sdl.lib sdlmain.lib libmpeg2.lib zlib.lib libflac.lib libmad.lib libTremor.lib"
+				OutputFile="$(PlatformName)\$(ConfigurationName)/ScummVMS43D.exe"
+				LinkIncremental="2"
+				SuppressStartupBanner="true"
+				AdditionalLibraryDirectories=""
+				IgnoreDefaultLibraryNames="$(CENoDefaultLib)"
+				GenerateDebugInformation="true"
+				ProgramDatabaseFile="$(PlatformName)\$(ConfigurationName)/scummvm.pdb"
+				StackReserveSize="65536"
+				StackCommitSize="4096"
+				EntryPointSymbol="WinMainCRTStartup"
+				BaseAddress="0x00010000"
+				TargetMachine="0"
+			/>
+			<Tool
+				Name="VCALinkTool"
+			/>
+			<Tool
+				Name="VCXDCMakeTool"
+			/>
+			<Tool
+				Name="VCBscMakeTool"
+				SuppressStartupBanner="true"
+				OutputFile="$(PlatformName)\$(ConfigurationName)/scummvm.bsc"
+			/>
+			<Tool
+				Name="VCCodeSignTool"
+			/>
+			<Tool
+				Name="VCPostBuildEventTool"
+			/>
+			<DeploymentTool
+				ForceDirty="-1"
+				RemoteDirectory="\&#54616;&#46300; &#46356;&#49828;&#53356;\ScummVM"
+				RegisterOutput="0"
+				AdditionalFiles=""
+			/>
+			<DebuggerTool
+			/>
+		</Configuration>
 	</Configurations>
 	<References>
 	</References>
@@ -1142,7 +1354,7 @@
 						/>
 					</FileConfiguration>
 					<FileConfiguration
-						Name="Release|PMP2500 (MIPSII)"
+						Name="Release|STANDARDSDK_500 (MIPSII)"
 						>
 						<Tool
 							Name="VCCLCompilerTool"
@@ -1166,23 +1378,39 @@
 						/>
 					</FileConfiguration>
 					<FileConfiguration
-						Name="Debug|PMP2500 (MIPSII)"
-						>
-						<Tool
-							Name="VCCLCompilerTool"
-							ObjectFile="$(IntDir)/$(InputName)1.obj"
-						/>
-					</FileConfiguration>
-					<FileConfiguration
-						Name="Release|STANDARDSDK_500 (MIPSII)"
-						>
-						<Tool
-							Name="VCCLCompilerTool"
-							ObjectFile="$(IntDir)/$(InputName)1.obj"
-						/>
-					</FileConfiguration>
-					<FileConfiguration
 						Name="Debug|STANDARDSDK_500 (MIPSII)"
+						>
+						<Tool
+							Name="VCCLCompilerTool"
+							ObjectFile="$(IntDir)/$(InputName)1.obj"
+						/>
+					</FileConfiguration>
+					<FileConfiguration
+						Name="Release|STANDARDSDK_500 (x86)"
+						>
+						<Tool
+							Name="VCCLCompilerTool"
+							ObjectFile="$(IntDir)/$(InputName)1.obj"
+						/>
+					</FileConfiguration>
+					<FileConfiguration
+						Name="Debug|STANDARDSDK_500 (x86)"
+						>
+						<Tool
+							Name="VCCLCompilerTool"
+							ObjectFile="$(IntDir)/$(InputName)1.obj"
+						/>
+					</FileConfiguration>
+					<FileConfiguration
+						Name="Release|PMP2500 (MIPSII)"
+						>
+						<Tool
+							Name="VCCLCompilerTool"
+							ObjectFile="$(IntDir)/$(InputName)1.obj"
+						/>
+					</FileConfiguration>
+					<FileConfiguration
+						Name="Debug|PMP2500 (MIPSII)"
 						>
 						<Tool
 							Name="VCCLCompilerTool"
@@ -1386,7 +1614,7 @@
 						/>
 					</FileConfiguration>
 					<FileConfiguration
-						Name="Release|PMP2500 (MIPSII)"
+						Name="Release|STANDARDSDK_500 (MIPSII)"
 						>
 						<Tool
 							Name="VCCLCompilerTool"
@@ -1410,23 +1638,39 @@
 						/>
 					</FileConfiguration>
 					<FileConfiguration
-						Name="Debug|PMP2500 (MIPSII)"
-						>
-						<Tool
-							Name="VCCLCompilerTool"
-							ObjectFile="$(IntDir)/$(InputName)1.obj"
-						/>
-					</FileConfiguration>
-					<FileConfiguration
-						Name="Release|STANDARDSDK_500 (MIPSII)"
-						>
-						<Tool
-							Name="VCCLCompilerTool"
-							ObjectFile="$(IntDir)/$(InputName)1.obj"
-						/>
-					</FileConfiguration>
-					<FileConfiguration
 						Name="Debug|STANDARDSDK_500 (MIPSII)"
+						>
+						<Tool
+							Name="VCCLCompilerTool"
+							ObjectFile="$(IntDir)/$(InputName)1.obj"
+						/>
+					</FileConfiguration>
+					<FileConfiguration
+						Name="Release|STANDARDSDK_500 (x86)"
+						>
+						<Tool
+							Name="VCCLCompilerTool"
+							ObjectFile="$(IntDir)/$(InputName)1.obj"
+						/>
+					</FileConfiguration>
+					<FileConfiguration
+						Name="Debug|STANDARDSDK_500 (x86)"
+						>
+						<Tool
+							Name="VCCLCompilerTool"
+							ObjectFile="$(IntDir)/$(InputName)1.obj"
+						/>
+					</FileConfiguration>
+					<FileConfiguration
+						Name="Release|PMP2500 (MIPSII)"
+						>
+						<Tool
+							Name="VCCLCompilerTool"
+							ObjectFile="$(IntDir)/$(InputName)1.obj"
+						/>
+					</FileConfiguration>
+					<FileConfiguration
+						Name="Debug|PMP2500 (MIPSII)"
 						>
 						<Tool
 							Name="VCCLCompilerTool"
@@ -2094,7 +2338,16 @@
 								/>
 							</FileConfiguration>
 							<FileConfiguration
-								Name="Release|PMP2500 (MIPSII)"
+								Name="Release|STANDARDSDK_500 (MIPSII)"
+								>
+								<Tool
+									Name="VCCLCompilerTool"
+									AdditionalIncludeDirectories=""
+									UsePrecompiledHeader="0"
+								/>
+							</FileConfiguration>
+							<FileConfiguration
+								Name="Release|Windows Mobile 5.0 Pocket PC SDK (ARMV4I)"
 								>
 								<Tool
 									Name="VCCLCompilerTool"
@@ -2123,25 +2376,6 @@
 								/>
 							</FileConfiguration>
 							<FileConfiguration
-								Name="Debug|PMP2500 (MIPSII)"
-								>
-								<Tool
-									Name="VCCLCompilerTool"
-									AdditionalIncludeDirectories=""
-									UsePrecompiledHeader="0"
-									BrowseInformation="1"
-								/>
-							</FileConfiguration>
-							<FileConfiguration
-								Name="Release|STANDARDSDK_500 (MIPSII)"
-								>
-								<Tool
-									Name="VCCLCompilerTool"
-									AdditionalIncludeDirectories=""
-									UsePrecompiledHeader="0"
-								/>
-							</FileConfiguration>
-							<FileConfiguration
 								Name="Debug|STANDARDSDK_500 (MIPSII)"
 								>
 								<Tool
@@ -2152,7 +2386,17 @@
 								/>
 							</FileConfiguration>
 							<FileConfiguration
-								Name="Release|Windows Mobile 5.0 Pocket PC SDK (ARMV4I)"
+								Name="Debug|Windows Mobile 5.0 Pocket PC SDK (ARMV4I)"
+								>
+								<Tool
+									Name="VCCLCompilerTool"
+									AdditionalIncludeDirectories=""
+									UsePrecompiledHeader="0"
+									BrowseInformation="1"
+								/>
+							</FileConfiguration>
+							<FileConfiguration
+								Name="Release|STANDARDSDK_500 (x86)"
 								>
 								<Tool
 									Name="VCCLCompilerTool"
@@ -2161,7 +2405,26 @@
 								/>
 							</FileConfiguration>
 							<FileConfiguration
-								Name="Debug|Windows Mobile 5.0 Pocket PC SDK (ARMV4I)"
+								Name="Debug|STANDARDSDK_500 (x86)"
+								>
+								<Tool
+									Name="VCCLCompilerTool"
+									AdditionalIncludeDirectories=""
+									UsePrecompiledHeader="0"
+									BrowseInformation="1"
+								/>
+							</FileConfiguration>
+							<FileConfiguration
+								Name="Release|PMP2500 (MIPSII)"
+								>
+								<Tool
+									Name="VCCLCompilerTool"
+									AdditionalIncludeDirectories=""
+									UsePrecompiledHeader="0"
+								/>
+							</FileConfiguration>
+							<FileConfiguration
+								Name="Debug|PMP2500 (MIPSII)"
 								>
 								<Tool
 									Name="VCCLCompilerTool"
@@ -2450,7 +2713,16 @@
 							/>
 						</FileConfiguration>
 						<FileConfiguration
-							Name="Release|PMP2500 (MIPSII)"
+							Name="Release|STANDARDSDK_500 (MIPSII)"
+							>
+							<Tool
+								Name="VCCLCompilerTool"
+								AdditionalIncludeDirectories=""
+								UsePrecompiledHeader="0"
+							/>
+						</FileConfiguration>
+						<FileConfiguration
+							Name="Release|Windows Mobile 5.0 Pocket PC SDK (ARMV4I)"
 							>
 							<Tool
 								Name="VCCLCompilerTool"
@@ -2479,25 +2751,6 @@
 							/>
 						</FileConfiguration>
 						<FileConfiguration
-							Name="Debug|PMP2500 (MIPSII)"
-							>
-							<Tool
-								Name="VCCLCompilerTool"
-								AdditionalIncludeDirectories=""
-								UsePrecompiledHeader="0"
-								BrowseInformation="1"
-							/>
-						</FileConfiguration>
-						<FileConfiguration
-							Name="Release|STANDARDSDK_500 (MIPSII)"
-							>
-							<Tool
-								Name="VCCLCompilerTool"
-								AdditionalIncludeDirectories=""
-								UsePrecompiledHeader="0"
-							/>
-						</FileConfiguration>
-						<FileConfiguration
 							Name="Debug|STANDARDSDK_500 (MIPSII)"
 							>
 							<Tool
@@ -2508,7 +2761,17 @@
 							/>
 						</FileConfiguration>
 						<FileConfiguration
-							Name="Release|Windows Mobile 5.0 Pocket PC SDK (ARMV4I)"
+							Name="Debug|Windows Mobile 5.0 Pocket PC SDK (ARMV4I)"
+							>
+							<Tool
+								Name="VCCLCompilerTool"
+								AdditionalIncludeDirectories=""
+								UsePrecompiledHeader="0"
+								BrowseInformation="1"
+							/>
+						</FileConfiguration>
+						<FileConfiguration
+							Name="Release|STANDARDSDK_500 (x86)"
 							>
 							<Tool
 								Name="VCCLCompilerTool"
@@ -2517,7 +2780,26 @@
 							/>
 						</FileConfiguration>
 						<FileConfiguration
-							Name="Debug|Windows Mobile 5.0 Pocket PC SDK (ARMV4I)"
+							Name="Debug|STANDARDSDK_500 (x86)"
+							>
+							<Tool
+								Name="VCCLCompilerTool"
+								AdditionalIncludeDirectories=""
+								UsePrecompiledHeader="0"
+								BrowseInformation="1"
+							/>
+						</FileConfiguration>
+						<FileConfiguration
+							Name="Release|PMP2500 (MIPSII)"
+							>
+							<Tool
+								Name="VCCLCompilerTool"
+								AdditionalIncludeDirectories=""
+								UsePrecompiledHeader="0"
+							/>
+						</FileConfiguration>
+						<FileConfiguration
+							Name="Debug|PMP2500 (MIPSII)"
 							>
 							<Tool
 								Name="VCCLCompilerTool"
@@ -2549,7 +2831,16 @@
 							/>
 						</FileConfiguration>
 						<FileConfiguration
-							Name="Release|PMP2500 (MIPSII)"
+							Name="Release|STANDARDSDK_500 (MIPSII)"
+							>
+							<Tool
+								Name="VCCLCompilerTool"
+								AdditionalIncludeDirectories=""
+								UsePrecompiledHeader="0"
+							/>
+						</FileConfiguration>
+						<FileConfiguration
+							Name="Release|Windows Mobile 5.0 Pocket PC SDK (ARMV4I)"
 							>
 							<Tool
 								Name="VCCLCompilerTool"
@@ -2578,25 +2869,6 @@
 							/>
 						</FileConfiguration>
 						<FileConfiguration
-							Name="Debug|PMP2500 (MIPSII)"
-							>
-							<Tool
-								Name="VCCLCompilerTool"
-								AdditionalIncludeDirectories=""
-								UsePrecompiledHeader="0"
-								BrowseInformation="1"
-							/>
-						</FileConfiguration>
-						<FileConfiguration
-							Name="Release|STANDARDSDK_500 (MIPSII)"
-							>
-							<Tool
-								Name="VCCLCompilerTool"
-								AdditionalIncludeDirectories=""
-								UsePrecompiledHeader="0"
-							/>
-						</FileConfiguration>
-						<FileConfiguration
 							Name="Debug|STANDARDSDK_500 (MIPSII)"
 							>
 							<Tool
@@ -2607,7 +2879,17 @@
 							/>
 						</FileConfiguration>
 						<FileConfiguration
-							Name="Release|Windows Mobile 5.0 Pocket PC SDK (ARMV4I)"
+							Name="Debug|Windows Mobile 5.0 Pocket PC SDK (ARMV4I)"
+							>
+							<Tool
+								Name="VCCLCompilerTool"
+								AdditionalIncludeDirectories=""
+								UsePrecompiledHeader="0"
+								BrowseInformation="1"
+							/>
+						</FileConfiguration>
+						<FileConfiguration
+							Name="Release|STANDARDSDK_500 (x86)"
 							>
 							<Tool
 								Name="VCCLCompilerTool"
@@ -2616,7 +2898,26 @@
 							/>
 						</FileConfiguration>
 						<FileConfiguration
-							Name="Debug|Windows Mobile 5.0 Pocket PC SDK (ARMV4I)"
+							Name="Debug|STANDARDSDK_500 (x86)"
+							>
+							<Tool
+								Name="VCCLCompilerTool"
+								AdditionalIncludeDirectories=""
+								UsePrecompiledHeader="0"
+								BrowseInformation="1"
+							/>
+						</FileConfiguration>
+						<FileConfiguration
+							Name="Release|PMP2500 (MIPSII)"
+							>
+							<Tool
+								Name="VCCLCompilerTool"
+								AdditionalIncludeDirectories=""
+								UsePrecompiledHeader="0"
+							/>
+						</FileConfiguration>
+						<FileConfiguration
+							Name="Debug|PMP2500 (MIPSII)"
 							>
 							<Tool
 								Name="VCCLCompilerTool"
@@ -2648,7 +2949,16 @@
 							/>
 						</FileConfiguration>
 						<FileConfiguration
-							Name="Release|PMP2500 (MIPSII)"
+							Name="Release|STANDARDSDK_500 (MIPSII)"
+							>
+							<Tool
+								Name="VCCLCompilerTool"
+								AdditionalIncludeDirectories=""
+								UsePrecompiledHeader="0"
+							/>
+						</FileConfiguration>
+						<FileConfiguration
+							Name="Release|Windows Mobile 5.0 Pocket PC SDK (ARMV4I)"
 							>
 							<Tool
 								Name="VCCLCompilerTool"
@@ -2677,25 +2987,6 @@
 							/>
 						</FileConfiguration>
 						<FileConfiguration
-							Name="Debug|PMP2500 (MIPSII)"
-							>
-							<Tool
-								Name="VCCLCompilerTool"
-								AdditionalIncludeDirectories=""
-								UsePrecompiledHeader="0"
-								BrowseInformation="1"
-							/>
-						</FileConfiguration>
-						<FileConfiguration
-							Name="Release|STANDARDSDK_500 (MIPSII)"
-							>
-							<Tool
-								Name="VCCLCompilerTool"
-								AdditionalIncludeDirectories=""
-								UsePrecompiledHeader="0"
-							/>
-						</FileConfiguration>
-						<FileConfiguration
 							Name="Debug|STANDARDSDK_500 (MIPSII)"
 							>
 							<Tool
@@ -2706,7 +2997,17 @@
 							/>
 						</FileConfiguration>
 						<FileConfiguration
-							Name="Release|Windows Mobile 5.0 Pocket PC SDK (ARMV4I)"
+							Name="Debug|Windows Mobile 5.0 Pocket PC SDK (ARMV4I)"
+							>
+							<Tool
+								Name="VCCLCompilerTool"
+								AdditionalIncludeDirectories=""
+								UsePrecompiledHeader="0"
+								BrowseInformation="1"
+							/>
+						</FileConfiguration>
+						<FileConfiguration
+							Name="Release|STANDARDSDK_500 (x86)"
 							>
 							<Tool
 								Name="VCCLCompilerTool"
@@ -2715,7 +3016,26 @@
 							/>
 						</FileConfiguration>
 						<FileConfiguration
-							Name="Debug|Windows Mobile 5.0 Pocket PC SDK (ARMV4I)"
+							Name="Debug|STANDARDSDK_500 (x86)"
+							>
+							<Tool
+								Name="VCCLCompilerTool"
+								AdditionalIncludeDirectories=""
+								UsePrecompiledHeader="0"
+								BrowseInformation="1"
+							/>
+						</FileConfiguration>
+						<FileConfiguration
+							Name="Release|PMP2500 (MIPSII)"
+							>
+							<Tool
+								Name="VCCLCompilerTool"
+								AdditionalIncludeDirectories=""
+								UsePrecompiledHeader="0"
+							/>
+						</FileConfiguration>
+						<FileConfiguration
+							Name="Debug|PMP2500 (MIPSII)"
 							>
 							<Tool
 								Name="VCCLCompilerTool"
@@ -2747,7 +3067,16 @@
 							/>
 						</FileConfiguration>
 						<FileConfiguration
-							Name="Release|PMP2500 (MIPSII)"
+							Name="Release|STANDARDSDK_500 (MIPSII)"
+							>
+							<Tool
+								Name="VCCLCompilerTool"
+								AdditionalIncludeDirectories=""
+								UsePrecompiledHeader="0"
+							/>
+						</FileConfiguration>
+						<FileConfiguration
+							Name="Release|Windows Mobile 5.0 Pocket PC SDK (ARMV4I)"
 							>
 							<Tool
 								Name="VCCLCompilerTool"
@@ -2776,25 +3105,6 @@
 							/>
 						</FileConfiguration>
 						<FileConfiguration
-							Name="Debug|PMP2500 (MIPSII)"
-							>
-							<Tool
-								Name="VCCLCompilerTool"
-								AdditionalIncludeDirectories=""
-								UsePrecompiledHeader="0"
-								BrowseInformation="1"
-							/>
-						</FileConfiguration>
-						<FileConfiguration
-							Name="Release|STANDARDSDK_500 (MIPSII)"
-							>
-							<Tool
-								Name="VCCLCompilerTool"
-								AdditionalIncludeDirectories=""
-								UsePrecompiledHeader="0"
-							/>
-						</FileConfiguration>
-						<FileConfiguration
 							Name="Debug|STANDARDSDK_500 (MIPSII)"
 							>
 							<Tool
@@ -2805,7 +3115,17 @@
 							/>
 						</FileConfiguration>
 						<FileConfiguration
-							Name="Release|Windows Mobile 5.0 Pocket PC SDK (ARMV4I)"
+							Name="Debug|Windows Mobile 5.0 Pocket PC SDK (ARMV4I)"
+							>
+							<Tool
+								Name="VCCLCompilerTool"
+								AdditionalIncludeDirectories=""
+								UsePrecompiledHeader="0"
+								BrowseInformation="1"
+							/>
+						</FileConfiguration>
+						<FileConfiguration
+							Name="Release|STANDARDSDK_500 (x86)"
 							>
 							<Tool
 								Name="VCCLCompilerTool"
@@ -2814,7 +3134,26 @@
 							/>
 						</FileConfiguration>
 						<FileConfiguration
-							Name="Debug|Windows Mobile 5.0 Pocket PC SDK (ARMV4I)"
+							Name="Debug|STANDARDSDK_500 (x86)"
+							>
+							<Tool
+								Name="VCCLCompilerTool"
+								AdditionalIncludeDirectories=""
+								UsePrecompiledHeader="0"
+								BrowseInformation="1"
+							/>
+						</FileConfiguration>
+						<FileConfiguration
+							Name="Release|PMP2500 (MIPSII)"
+							>
+							<Tool
+								Name="VCCLCompilerTool"
+								AdditionalIncludeDirectories=""
+								UsePrecompiledHeader="0"
+							/>
+						</FileConfiguration>
+						<FileConfiguration
+							Name="Debug|PMP2500 (MIPSII)"
 							>
 							<Tool
 								Name="VCCLCompilerTool"
@@ -2850,7 +3189,16 @@
 							/>
 						</FileConfiguration>
 						<FileConfiguration
-							Name="Release|PMP2500 (MIPSII)"
+							Name="Release|STANDARDSDK_500 (MIPSII)"
+							>
+							<Tool
+								Name="VCCLCompilerTool"
+								AdditionalIncludeDirectories=""
+								UsePrecompiledHeader="0"
+							/>
+						</FileConfiguration>
+						<FileConfiguration
+							Name="Release|Windows Mobile 5.0 Pocket PC SDK (ARMV4I)"
 							>
 							<Tool
 								Name="VCCLCompilerTool"
@@ -2879,25 +3227,6 @@
 							/>
 						</FileConfiguration>
 						<FileConfiguration
-							Name="Debug|PMP2500 (MIPSII)"
-							>
-							<Tool
-								Name="VCCLCompilerTool"
-								AdditionalIncludeDirectories=""
-								UsePrecompiledHeader="0"
-								BrowseInformation="1"
-							/>
-						</FileConfiguration>
-						<FileConfiguration
-							Name="Release|STANDARDSDK_500 (MIPSII)"
-							>
-							<Tool
-								Name="VCCLCompilerTool"
-								AdditionalIncludeDirectories=""
-								UsePrecompiledHeader="0"
-							/>
-						</FileConfiguration>
-						<FileConfiguration
 							Name="Debug|STANDARDSDK_500 (MIPSII)"
 							>
 							<Tool
@@ -2908,7 +3237,17 @@
 							/>
 						</FileConfiguration>
 						<FileConfiguration
-							Name="Release|Windows Mobile 5.0 Pocket PC SDK (ARMV4I)"
+							Name="Debug|Windows Mobile 5.0 Pocket PC SDK (ARMV4I)"
+							>
+							<Tool
+								Name="VCCLCompilerTool"
+								AdditionalIncludeDirectories=""
+								UsePrecompiledHeader="0"
+								BrowseInformation="1"
+							/>
+						</FileConfiguration>
+						<FileConfiguration
+							Name="Release|STANDARDSDK_500 (x86)"
 							>
 							<Tool
 								Name="VCCLCompilerTool"
@@ -2917,7 +3256,26 @@
 							/>
 						</FileConfiguration>
 						<FileConfiguration
-							Name="Debug|Windows Mobile 5.0 Pocket PC SDK (ARMV4I)"
+							Name="Debug|STANDARDSDK_500 (x86)"
+							>
+							<Tool
+								Name="VCCLCompilerTool"
+								AdditionalIncludeDirectories=""
+								UsePrecompiledHeader="0"
+								BrowseInformation="1"
+							/>
+						</FileConfiguration>
+						<FileConfiguration
+							Name="Release|PMP2500 (MIPSII)"
+							>
+							<Tool
+								Name="VCCLCompilerTool"
+								AdditionalIncludeDirectories=""
+								UsePrecompiledHeader="0"
+							/>
+						</FileConfiguration>
+						<FileConfiguration
+							Name="Debug|PMP2500 (MIPSII)"
 							>
 							<Tool
 								Name="VCCLCompilerTool"
@@ -2949,7 +3307,16 @@
 							/>
 						</FileConfiguration>
 						<FileConfiguration
-							Name="Release|PMP2500 (MIPSII)"
+							Name="Release|STANDARDSDK_500 (MIPSII)"
+							>
+							<Tool
+								Name="VCCLCompilerTool"
+								AdditionalIncludeDirectories=""
+								UsePrecompiledHeader="0"
+							/>
+						</FileConfiguration>
+						<FileConfiguration
+							Name="Release|Windows Mobile 5.0 Pocket PC SDK (ARMV4I)"
 							>
 							<Tool
 								Name="VCCLCompilerTool"
@@ -2978,25 +3345,6 @@
 							/>
 						</FileConfiguration>
 						<FileConfiguration
-							Name="Debug|PMP2500 (MIPSII)"
-							>
-							<Tool
-								Name="VCCLCompilerTool"
-								AdditionalIncludeDirectories=""
-								UsePrecompiledHeader="0"
-								BrowseInformation="1"
-							/>
-						</FileConfiguration>
-						<FileConfiguration
-							Name="Release|STANDARDSDK_500 (MIPSII)"
-							>
-							<Tool
-								Name="VCCLCompilerTool"
-								AdditionalIncludeDirectories=""
-								UsePrecompiledHeader="0"
-							/>
-						</FileConfiguration>
-						<FileConfiguration
 							Name="Debug|STANDARDSDK_500 (MIPSII)"
 							>
 							<Tool
@@ -3007,7 +3355,17 @@
 							/>
 						</FileConfiguration>
 						<FileConfiguration
-							Name="Release|Windows Mobile 5.0 Pocket PC SDK (ARMV4I)"
+							Name="Debug|Windows Mobile 5.0 Pocket PC SDK (ARMV4I)"
+							>
+							<Tool
+								Name="VCCLCompilerTool"
+								AdditionalIncludeDirectories=""
+								UsePrecompiledHeader="0"
+								BrowseInformation="1"
+							/>
+						</FileConfiguration>
+						<FileConfiguration
+							Name="Release|STANDARDSDK_500 (x86)"
 							>
 							<Tool
 								Name="VCCLCompilerTool"
@@ -3016,7 +3374,26 @@
 							/>
 						</FileConfiguration>
 						<FileConfiguration
-							Name="Debug|Windows Mobile 5.0 Pocket PC SDK (ARMV4I)"
+							Name="Debug|STANDARDSDK_500 (x86)"
+							>
+							<Tool
+								Name="VCCLCompilerTool"
+								AdditionalIncludeDirectories=""
+								UsePrecompiledHeader="0"
+								BrowseInformation="1"
+							/>
+						</FileConfiguration>
+						<FileConfiguration
+							Name="Release|PMP2500 (MIPSII)"
+							>
+							<Tool
+								Name="VCCLCompilerTool"
+								AdditionalIncludeDirectories=""
+								UsePrecompiledHeader="0"
+							/>
+						</FileConfiguration>
+						<FileConfiguration
+							Name="Debug|PMP2500 (MIPSII)"
 							>
 							<Tool
 								Name="VCCLCompilerTool"
@@ -3048,7 +3425,16 @@
 							/>
 						</FileConfiguration>
 						<FileConfiguration
-							Name="Release|PMP2500 (MIPSII)"
+							Name="Release|STANDARDSDK_500 (MIPSII)"
+							>
+							<Tool
+								Name="VCCLCompilerTool"
+								AdditionalIncludeDirectories=""
+								UsePrecompiledHeader="0"
+							/>
+						</FileConfiguration>
+						<FileConfiguration
+							Name="Release|Windows Mobile 5.0 Pocket PC SDK (ARMV4I)"
 							>
 							<Tool
 								Name="VCCLCompilerTool"
@@ -3077,25 +3463,6 @@
 							/>
 						</FileConfiguration>
 						<FileConfiguration
-							Name="Debug|PMP2500 (MIPSII)"
-							>
-							<Tool
-								Name="VCCLCompilerTool"
-								AdditionalIncludeDirectories=""
-								UsePrecompiledHeader="0"
-								BrowseInformation="1"
-							/>
-						</FileConfiguration>
-						<FileConfiguration
-							Name="Release|STANDARDSDK_500 (MIPSII)"
-							>
-							<Tool
-								Name="VCCLCompilerTool"
-								AdditionalIncludeDirectories=""
-								UsePrecompiledHeader="0"
-							/>
-						</FileConfiguration>
-						<FileConfiguration
 							Name="Debug|STANDARDSDK_500 (MIPSII)"
 							>
 							<Tool
@@ -3106,7 +3473,17 @@
 							/>
 						</FileConfiguration>
 						<FileConfiguration
-							Name="Release|Windows Mobile 5.0 Pocket PC SDK (ARMV4I)"
+							Name="Debug|Windows Mobile 5.0 Pocket PC SDK (ARMV4I)"
+							>
+							<Tool
+								Name="VCCLCompilerTool"
+								AdditionalIncludeDirectories=""
+								UsePrecompiledHeader="0"
+								BrowseInformation="1"
+							/>
+						</FileConfiguration>
+						<FileConfiguration
+							Name="Release|STANDARDSDK_500 (x86)"
 							>
 							<Tool
 								Name="VCCLCompilerTool"
@@ -3115,7 +3492,26 @@
 							/>
 						</FileConfiguration>
 						<FileConfiguration
-							Name="Debug|Windows Mobile 5.0 Pocket PC SDK (ARMV4I)"
+							Name="Debug|STANDARDSDK_500 (x86)"
+							>
+							<Tool
+								Name="VCCLCompilerTool"
+								AdditionalIncludeDirectories=""
+								UsePrecompiledHeader="0"
+								BrowseInformation="1"
+							/>
+						</FileConfiguration>
+						<FileConfiguration
+							Name="Release|PMP2500 (MIPSII)"
+							>
+							<Tool
+								Name="VCCLCompilerTool"
+								AdditionalIncludeDirectories=""
+								UsePrecompiledHeader="0"
+							/>
+						</FileConfiguration>
+						<FileConfiguration
+							Name="Debug|PMP2500 (MIPSII)"
 							>
 							<Tool
 								Name="VCCLCompilerTool"
@@ -3151,7 +3547,16 @@
 							/>
 						</FileConfiguration>
 						<FileConfiguration
-							Name="Release|PMP2500 (MIPSII)"
+							Name="Release|STANDARDSDK_500 (MIPSII)"
+							>
+							<Tool
+								Name="VCCLCompilerTool"
+								AdditionalIncludeDirectories=""
+								UsePrecompiledHeader="0"
+							/>
+						</FileConfiguration>
+						<FileConfiguration
+							Name="Release|Windows Mobile 5.0 Pocket PC SDK (ARMV4I)"
 							>
 							<Tool
 								Name="VCCLCompilerTool"
@@ -3180,25 +3585,6 @@
 							/>
 						</FileConfiguration>
 						<FileConfiguration
-							Name="Debug|PMP2500 (MIPSII)"
-							>
-							<Tool
-								Name="VCCLCompilerTool"
-								AdditionalIncludeDirectories=""
-								UsePrecompiledHeader="0"
-								BrowseInformation="1"
-							/>
-						</FileConfiguration>
-						<FileConfiguration
-							Name="Release|STANDARDSDK_500 (MIPSII)"
-							>
-							<Tool
-								Name="VCCLCompilerTool"
-								AdditionalIncludeDirectories=""
-								UsePrecompiledHeader="0"
-							/>
-						</FileConfiguration>
-						<FileConfiguration
 							Name="Debug|STANDARDSDK_500 (MIPSII)"
 							>
 							<Tool
@@ -3209,7 +3595,17 @@
 							/>
 						</FileConfiguration>
 						<FileConfiguration
-							Name="Release|Windows Mobile 5.0 Pocket PC SDK (ARMV4I)"
+							Name="Debug|Windows Mobile 5.0 Pocket PC SDK (ARMV4I)"
+							>
+							<Tool
+								Name="VCCLCompilerTool"
+								AdditionalIncludeDirectories=""
+								UsePrecompiledHeader="0"
+								BrowseInformation="1"
+							/>
+						</FileConfiguration>
+						<FileConfiguration
+							Name="Release|STANDARDSDK_500 (x86)"
 							>
 							<Tool
 								Name="VCCLCompilerTool"
@@ -3218,7 +3614,26 @@
 							/>
 						</FileConfiguration>
 						<FileConfiguration
-							Name="Debug|Windows Mobile 5.0 Pocket PC SDK (ARMV4I)"
+							Name="Debug|STANDARDSDK_500 (x86)"
+							>
+							<Tool
+								Name="VCCLCompilerTool"
+								AdditionalIncludeDirectories=""
+								UsePrecompiledHeader="0"
+								BrowseInformation="1"
+							/>
+						</FileConfiguration>
+						<FileConfiguration
+							Name="Release|PMP2500 (MIPSII)"
+							>
+							<Tool
+								Name="VCCLCompilerTool"
+								AdditionalIncludeDirectories=""
+								UsePrecompiledHeader="0"
+							/>
+						</FileConfiguration>
+						<FileConfiguration
+							Name="Debug|PMP2500 (MIPSII)"
 							>
 							<Tool
 								Name="VCCLCompilerTool"
@@ -3258,7 +3673,16 @@
 							/>
 						</FileConfiguration>
 						<FileConfiguration
-							Name="Release|PMP2500 (MIPSII)"
+							Name="Release|STANDARDSDK_500 (MIPSII)"
+							>
+							<Tool
+								Name="VCCLCompilerTool"
+								AdditionalIncludeDirectories=""
+								UsePrecompiledHeader="0"
+							/>
+						</FileConfiguration>
+						<FileConfiguration
+							Name="Release|Windows Mobile 5.0 Pocket PC SDK (ARMV4I)"
 							>
 							<Tool
 								Name="VCCLCompilerTool"
@@ -3287,25 +3711,6 @@
 							/>
 						</FileConfiguration>
 						<FileConfiguration
-							Name="Debug|PMP2500 (MIPSII)"
-							>
-							<Tool
-								Name="VCCLCompilerTool"
-								AdditionalIncludeDirectories=""
-								UsePrecompiledHeader="0"
-								BrowseInformation="1"
-							/>
-						</FileConfiguration>
-						<FileConfiguration
-							Name="Release|STANDARDSDK_500 (MIPSII)"
-							>
-							<Tool
-								Name="VCCLCompilerTool"
-								AdditionalIncludeDirectories=""
-								UsePrecompiledHeader="0"
-							/>
-						</FileConfiguration>
-						<FileConfiguration
 							Name="Debug|STANDARDSDK_500 (MIPSII)"
 							>
 							<Tool
@@ -3316,7 +3721,17 @@
 							/>
 						</FileConfiguration>
 						<FileConfiguration
-							Name="Release|Windows Mobile 5.0 Pocket PC SDK (ARMV4I)"
+							Name="Debug|Windows Mobile 5.0 Pocket PC SDK (ARMV4I)"
+							>
+							<Tool
+								Name="VCCLCompilerTool"
+								AdditionalIncludeDirectories=""
+								UsePrecompiledHeader="0"
+								BrowseInformation="1"
+							/>
+						</FileConfiguration>
+						<FileConfiguration
+							Name="Release|STANDARDSDK_500 (x86)"
 							>
 							<Tool
 								Name="VCCLCompilerTool"
@@ -3325,7 +3740,26 @@
 							/>
 						</FileConfiguration>
 						<FileConfiguration
-							Name="Debug|Windows Mobile 5.0 Pocket PC SDK (ARMV4I)"
+							Name="Debug|STANDARDSDK_500 (x86)"
+							>
+							<Tool
+								Name="VCCLCompilerTool"
+								AdditionalIncludeDirectories=""
+								UsePrecompiledHeader="0"
+								BrowseInformation="1"
+							/>
+						</FileConfiguration>
+						<FileConfiguration
+							Name="Release|PMP2500 (MIPSII)"
+							>
+							<Tool
+								Name="VCCLCompilerTool"
+								AdditionalIncludeDirectories=""
+								UsePrecompiledHeader="0"
+							/>
+						</FileConfiguration>
+						<FileConfiguration
+							Name="Debug|PMP2500 (MIPSII)"
 							>
 							<Tool
 								Name="VCCLCompilerTool"
@@ -3361,7 +3795,16 @@
 							/>
 						</FileConfiguration>
 						<FileConfiguration
-							Name="Release|PMP2500 (MIPSII)"
+							Name="Release|STANDARDSDK_500 (MIPSII)"
+							>
+							<Tool
+								Name="VCCLCompilerTool"
+								AdditionalIncludeDirectories=""
+								UsePrecompiledHeader="0"
+							/>
+						</FileConfiguration>
+						<FileConfiguration
+							Name="Release|Windows Mobile 5.0 Pocket PC SDK (ARMV4I)"
 							>
 							<Tool
 								Name="VCCLCompilerTool"
@@ -3390,25 +3833,6 @@
 							/>
 						</FileConfiguration>
 						<FileConfiguration
-							Name="Debug|PMP2500 (MIPSII)"
-							>
-							<Tool
-								Name="VCCLCompilerTool"
-								AdditionalIncludeDirectories=""
-								UsePrecompiledHeader="0"
-								BrowseInformation="1"
-							/>
-						</FileConfiguration>
-						<FileConfiguration
-							Name="Release|STANDARDSDK_500 (MIPSII)"
-							>
-							<Tool
-								Name="VCCLCompilerTool"
-								AdditionalIncludeDirectories=""
-								UsePrecompiledHeader="0"
-							/>
-						</FileConfiguration>
-						<FileConfiguration
 							Name="Debug|STANDARDSDK_500 (MIPSII)"
 							>
 							<Tool
@@ -3419,7 +3843,17 @@
 							/>
 						</FileConfiguration>
 						<FileConfiguration
-							Name="Release|Windows Mobile 5.0 Pocket PC SDK (ARMV4I)"
+							Name="Debug|Windows Mobile 5.0 Pocket PC SDK (ARMV4I)"
+							>
+							<Tool
+								Name="VCCLCompilerTool"
+								AdditionalIncludeDirectories=""
+								UsePrecompiledHeader="0"
+								BrowseInformation="1"
+							/>
+						</FileConfiguration>
+						<FileConfiguration
+							Name="Release|STANDARDSDK_500 (x86)"
 							>
 							<Tool
 								Name="VCCLCompilerTool"
@@ -3428,7 +3862,26 @@
 							/>
 						</FileConfiguration>
 						<FileConfiguration
-							Name="Debug|Windows Mobile 5.0 Pocket PC SDK (ARMV4I)"
+							Name="Debug|STANDARDSDK_500 (x86)"
+							>
+							<Tool
+								Name="VCCLCompilerTool"
+								AdditionalIncludeDirectories=""
+								UsePrecompiledHeader="0"
+								BrowseInformation="1"
+							/>
+						</FileConfiguration>
+						<FileConfiguration
+							Name="Release|PMP2500 (MIPSII)"
+							>
+							<Tool
+								Name="VCCLCompilerTool"
+								AdditionalIncludeDirectories=""
+								UsePrecompiledHeader="0"
+							/>
+						</FileConfiguration>
+						<FileConfiguration
+							Name="Debug|PMP2500 (MIPSII)"
 							>
 							<Tool
 								Name="VCCLCompilerTool"
@@ -3464,7 +3917,16 @@
 							/>
 						</FileConfiguration>
 						<FileConfiguration
-							Name="Release|PMP2500 (MIPSII)"
+							Name="Release|STANDARDSDK_500 (MIPSII)"
+							>
+							<Tool
+								Name="VCCLCompilerTool"
+								AdditionalIncludeDirectories=""
+								UsePrecompiledHeader="0"
+							/>
+						</FileConfiguration>
+						<FileConfiguration
+							Name="Release|Windows Mobile 5.0 Pocket PC SDK (ARMV4I)"
 							>
 							<Tool
 								Name="VCCLCompilerTool"
@@ -3493,25 +3955,6 @@
 							/>
 						</FileConfiguration>
 						<FileConfiguration
-							Name="Debug|PMP2500 (MIPSII)"
-							>
-							<Tool
-								Name="VCCLCompilerTool"
-								AdditionalIncludeDirectories=""
-								UsePrecompiledHeader="0"
-								BrowseInformation="1"
-							/>
-						</FileConfiguration>
-						<FileConfiguration
-							Name="Release|STANDARDSDK_500 (MIPSII)"
-							>
-							<Tool
-								Name="VCCLCompilerTool"
-								AdditionalIncludeDirectories=""
-								UsePrecompiledHeader="0"
-							/>
-						</FileConfiguration>
-						<FileConfiguration
 							Name="Debug|STANDARDSDK_500 (MIPSII)"
 							>
 							<Tool
@@ -3522,7 +3965,17 @@
 							/>
 						</FileConfiguration>
 						<FileConfiguration
-							Name="Release|Windows Mobile 5.0 Pocket PC SDK (ARMV4I)"
+							Name="Debug|Windows Mobile 5.0 Pocket PC SDK (ARMV4I)"
+							>
+							<Tool
+								Name="VCCLCompilerTool"
+								AdditionalIncludeDirectories=""
+								UsePrecompiledHeader="0"
+								BrowseInformation="1"
+							/>
+						</FileConfiguration>
+						<FileConfiguration
+							Name="Release|STANDARDSDK_500 (x86)"
 							>
 							<Tool
 								Name="VCCLCompilerTool"
@@ -3531,7 +3984,26 @@
 							/>
 						</FileConfiguration>
 						<FileConfiguration
-							Name="Debug|Windows Mobile 5.0 Pocket PC SDK (ARMV4I)"
+							Name="Debug|STANDARDSDK_500 (x86)"
+							>
+							<Tool
+								Name="VCCLCompilerTool"
+								AdditionalIncludeDirectories=""
+								UsePrecompiledHeader="0"
+								BrowseInformation="1"
+							/>
+						</FileConfiguration>
+						<FileConfiguration
+							Name="Release|PMP2500 (MIPSII)"
+							>
+							<Tool
+								Name="VCCLCompilerTool"
+								AdditionalIncludeDirectories=""
+								UsePrecompiledHeader="0"
+							/>
+						</FileConfiguration>
+						<FileConfiguration
+							Name="Debug|PMP2500 (MIPSII)"
 							>
 							<Tool
 								Name="VCCLCompilerTool"
@@ -3567,7 +4039,16 @@
 							/>
 						</FileConfiguration>
 						<FileConfiguration
-							Name="Release|PMP2500 (MIPSII)"
+							Name="Release|STANDARDSDK_500 (MIPSII)"
+							>
+							<Tool
+								Name="VCCLCompilerTool"
+								AdditionalIncludeDirectories=""
+								UsePrecompiledHeader="0"
+							/>
+						</FileConfiguration>
+						<FileConfiguration
+							Name="Release|Windows Mobile 5.0 Pocket PC SDK (ARMV4I)"
 							>
 							<Tool
 								Name="VCCLCompilerTool"
@@ -3596,25 +4077,6 @@
 							/>
 						</FileConfiguration>
 						<FileConfiguration
-							Name="Debug|PMP2500 (MIPSII)"
-							>
-							<Tool
-								Name="VCCLCompilerTool"
-								AdditionalIncludeDirectories=""
-								UsePrecompiledHeader="0"
-								BrowseInformation="1"
-							/>
-						</FileConfiguration>
-						<FileConfiguration
-							Name="Release|STANDARDSDK_500 (MIPSII)"
-							>
-							<Tool
-								Name="VCCLCompilerTool"
-								AdditionalIncludeDirectories=""
-								UsePrecompiledHeader="0"
-							/>
-						</FileConfiguration>
-						<FileConfiguration
 							Name="Debug|STANDARDSDK_500 (MIPSII)"
 							>
 							<Tool
@@ -3625,7 +4087,17 @@
 							/>
 						</FileConfiguration>
 						<FileConfiguration
-							Name="Release|Windows Mobile 5.0 Pocket PC SDK (ARMV4I)"
+							Name="Debug|Windows Mobile 5.0 Pocket PC SDK (ARMV4I)"
+							>
+							<Tool
+								Name="VCCLCompilerTool"
+								AdditionalIncludeDirectories=""
+								UsePrecompiledHeader="0"
+								BrowseInformation="1"
+							/>
+						</FileConfiguration>
+						<FileConfiguration
+							Name="Release|STANDARDSDK_500 (x86)"
 							>
 							<Tool
 								Name="VCCLCompilerTool"
@@ -3634,7 +4106,26 @@
 							/>
 						</FileConfiguration>
 						<FileConfiguration
-							Name="Debug|Windows Mobile 5.0 Pocket PC SDK (ARMV4I)"
+							Name="Debug|STANDARDSDK_500 (x86)"
+							>
+							<Tool
+								Name="VCCLCompilerTool"
+								AdditionalIncludeDirectories=""
+								UsePrecompiledHeader="0"
+								BrowseInformation="1"
+							/>
+						</FileConfiguration>
+						<FileConfiguration
+							Name="Release|PMP2500 (MIPSII)"
+							>
+							<Tool
+								Name="VCCLCompilerTool"
+								AdditionalIncludeDirectories=""
+								UsePrecompiledHeader="0"
+							/>
+						</FileConfiguration>
+						<FileConfiguration
+							Name="Debug|PMP2500 (MIPSII)"
 							>
 							<Tool
 								Name="VCCLCompilerTool"
