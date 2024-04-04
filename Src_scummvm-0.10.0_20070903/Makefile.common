@@ -1,0 +1,123 @@
+# $Id: Makefile.common 27432 2007-06-15 18:42:40Z fingolfin $
+# This file is used by Makefile and declares common build rules,
+# a list of common object files etc.
+
+######################################################################
+# The default build target: just build the scummvm executable
+######################################################################
+all: $(EXECUTABLE) plugins
+
+
+######################################################################
+# Various minor settings
+######################################################################
+
+# Files that are to be included in the archive built by "make dist"
+DISTFILES := \
+	Makefile Makefile.common \
+	AUTHORS NEWS README COPYING COPYRIGHT
+
+# The dist file name
+ZIPFILE := scummvm-`date '+%Y-%m-%d'`.zip
+
+# The name for the directory used for depenency tracking
+DEPDIR := .deps
+
+
+######################################################################
+# Module settings
+######################################################################
+
+MODULES := test tools base $(MODULES)
+
+-include $(srcdir)/engines/engines.mk
+
+# After the game specific modules follow the shared modules
+MODULES += \
+	engines \
+	gui \
+	graphics \
+	sound \
+	common \
+	backends
+
+ifdef USE_MT32EMU
+MODULES += sound/softsynth/mt32
+endif
+
+ifdef DISABLE_SCALERS
+DEFINES += -DDISABLE_SCALERS
+endif
+
+ifdef DISABLE_HQ_SCALERS
+DEFINES += -DDISABLE_HQ_SCALERS
+endif
+
+######################################################################
+# The build rules follow - normally you should have no need to
+# touch whatever comes after here.
+######################################################################
+
+# Concat DEFINES and INCLUDES to form the CPPFLAGS
+CPPFLAGS:= $(DEFINES) $(INCLUDES)
+
+# Include the build instructions for all modules
+-include $(addprefix $(srcdir)/, $(addsuffix /module.mk,$(MODULES)))
+
+# Depdir information
+DEPDIRS = $(addsuffix $(DEPDIR),$(MODULE_DIRS))
+DEPFILES = 
+
+# Make base/version.o depend on all other object files. This way if anything is
+# changed, it causes version.cpp to be recompiled. This in turn ensures that
+# the build date in gScummVMBuildDate is correct.
+base/version.o: $(filter-out base/libbase.a,$(OBJS))
+
+# The build rule for the ScummVM executable
+$(EXECUTABLE):  $(OBJS)
+	$(CXX) $(LDFLAGS) $(PRE_OBJS_FLAGS) $+ $(POST_OBJS_FLAGS) $(LIBS) -o $@
+
+distclean: clean
+	$(RM_REC) $(DEPDIRS)
+	$(RM) config.h config.mk config.log
+
+clean:
+	$(RM) $(OBJS) $(EXECUTABLE)
+
+.PHONY: all clean dist distclean plugins
+
+# Old (dumb) compile & dependcy rules
+#INCS	= scumm/scumm.h common/scummsys.h common/stdafx.h
+#.cpp.o:
+#	$(CXX) $(CXXFLAGS) $(CPPFLAGS) -c $(<) -o $*.o
+#$(OBJS): $(INCS)
+
+ifndef HAVE_GCC3
+# If you use GCC, disable the above and enable this for intelligent
+# dependency tracking. 
+.cpp.o:
+	$(MKDIR) $(*D)/$(DEPDIR)
+	$(CXX) -Wp,-MMD,"$(*D)/$(DEPDIR)/$(*F).d2" $(CXXFLAGS) $(CPPFLAGS) -c $(<) -o $*.o
+	$(ECHO) "$(*D)/" > $(*D)/$(DEPDIR)/$(*F).d
+	$(CAT) "$(*D)/$(DEPDIR)/$(*F).d2" >> "$(*D)/$(DEPDIR)/$(*F).d"
+	$(RM) "$(*D)/$(DEPDIR)/$(*F).d2"
+else
+# If you even have GCC 3.x, you can use this build rule, which is safer; the above
+# rule can get you into a bad state if you Ctrl-C at the wrong moment.
+# Also, with this GCC inserts additional dummy rules for the involved headers,
+# which ensures a smooth compilation even if said headers become obsolete.
+.cpp.o:
+	$(MKDIR) $(*D)/$(DEPDIR)
+	$(CXX) -Wp,-MMD,"$(*D)/$(DEPDIR)/$(*F).d",-MQ,"$@",-MP $(CXXFLAGS) $(CPPFLAGS) -c $(<) -o $*.o
+endif
+
+ifdef HAVE_NASM
+.SUFFIXES: .asm
+
+.asm.o:
+	$(NASM) -O1 $(NASMFLAGS) -g -o $*.o $(<)
+endif
+
+# Include the dependency tracking files. We add /dev/null at the end
+# of the list to avoid a warning/error if no .d file exist
+-include $(wildcard $(addsuffix /*.d,$(DEPDIRS))) /dev/null

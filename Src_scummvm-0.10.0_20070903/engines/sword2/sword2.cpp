@@ -1,0 +1,728 @@
+/* ScummVM - Graphic Adventure Engine
+ *
+ * ScummVM is the legal property of its developers, whose names
+ * are too numerous to list here. Please refer to the COPYRIGHT
+ * file distributed with this source distribution.
+ *
+ * Additional copyright for this file:
+ * Copyright (C) 1994-1998 Revolution Software Ltd.
+ *
+ * This program is free software; you can redistribute it and/or
+ * modify it under the terms of the GNU General Public License
+ * as published by the Free Software Foundation; either version 2
+ * of the License, or (at your option) any later version.
+ *
+ * This program is distributed in the hope that it will be useful,
+ * but WITHOUT ANY WARRANTY; without even the implied warranty of
+ * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+ * GNU General Public License for more details.
+ *
+ * You should have received a copy of the GNU General Public License
+ * along with this program; if not, write to the Free Software
+ * Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA 02110-1301, USA.
+ *
+ * $URL: https://scummvm.svn.sourceforge.net/svnroot/scummvm/scummvm/tags/release-0-10-0/engines/sword2/sword2.cpp $
+ * $Id: sword2.cpp 27030 2007-05-31 20:28:29Z fingolfin $
+ */
+
+#include "common/stdafx.h"
+
+#include "base/plugins.h"
+
+#include "common/config-manager.h"
+#include "common/file.h"
+#include "common/fs.h"
+#include "common/events.h"
+#include "common/system.h"
+
+#include "sword2/sword2.h"
+#include "sword2/defs.h"
+#include "sword2/header.h"
+#include "sword2/console.h"
+#include "sword2/controls.h"
+#include "sword2/logic.h"
+#include "sword2/maketext.h"
+#include "sword2/memory.h"
+#include "sword2/mouse.h"
+#include "sword2/resman.h"
+#include "sword2/router.h"
+#include "sword2/screen.h"
+#include "sword2/sound.h"
+
+namespace Sword2 {
+
+struct GameSettings {
+	const char *gameid;
+	const char *description;
+	uint32 features;
+	const char *detectname;
+};
+
+static const GameSettings sword2_settings[] = {
+	/* Broken Sword 2 */
+	{"sword2", "Broken Sword 2: The Smoking Mirror", 0, "players.clu" },
+	{"sword2alt", "Broken Sword 2: The Smoking Mirror (alt)", 0, "r2ctlns.ocx" },
+	{"sword2demo", "Broken Sword 2: The Smoking Mirror (Demo)", Sword2::GF_DEMO, "players.clu" },
+	{NULL, NULL, 0, NULL}
+};
+
+} // End of namespace Sword2
+
+GameList Engine_SWORD2_gameIDList() {
+	const Sword2::GameSettings *g = Sword2::sword2_settings;
+	GameList games;
+	while (g->gameid) {
+		games.push_back(GameDescriptor(g->gameid, g->description));
+		g++;
+	}
+	return games;
+}
+
+GameDescriptor Engine_SWORD2_findGameID(const char *gameid) {
+	const Sword2::GameSettings *g = Sword2::sword2_settings;
+	while (g->gameid) {
+		if (0 == scumm_stricmp(gameid, g->gameid))
+			break;
+		g++;
+	}
+	return GameDescriptor(g->gameid, g->description);
+}
+
+GameList Engine_SWORD2_detectGames(const FSList &fslist) {
+	GameList detectedGames;
+	const Sword2::GameSettings *g;
+	FSList::const_iterator file;
+
+	// TODO: It would be nice if we had code here which distinguishes
+	// between the 'sword2' and 'sword2demo' targets. The current code
+	// can't do that since they use the same detectname.
+
+	for (g = Sword2::sword2_settings; g->gameid; ++g) {
+		// Iterate over all files in the given directory
+		for (file = fslist.begin(); file != fslist.end(); ++file) {
+			if (!file->isDirectory()) {
+				const char *fileName = file->name().c_str();
+
+				if (0 == scumm_stricmp(g->detectname, fileName)) {
+					// Match found, add to list of candidates, then abort inner loop.
+					detectedGames.push_back(GameDescriptor(g->gameid, g->description));
+					break;
+				}
+			}
+		}
+	}
+
+	
+	if (detectedGames.empty()) {
+		// Nothing found -- try to recurse into the 'clusters' subdirectory,
+		// present e.g. if the user copied the data straight from CD.
+		for (file = fslist.begin(); file != fslist.end(); ++file) {
+			if (file->isDirectory()) {
+				const char *fileName = file->name().c_str();
+
+				if (0 == scumm_stricmp("clusters", fileName)) {
+					FSList recList;
+					if (file->listDir(recList, FilesystemNode::kListAll)) {
+						GameList recGames(Engine_SWORD2_detectGames(recList));
+						if (!recGames.empty()) {
+							detectedGames.push_back(recGames);
+							break;
+						}
+					}
+				}
+			}
+		}
+	}
+
+
+	return detectedGames;
+}
+
+PluginError Engine_SWORD2_create(OSystem *syst, Engine **engine) {
+	assert(syst);
+	assert(engine);
+
+	FSList fslist;
+	FilesystemNode dir(ConfMan.get("path"));
+	if (!dir.listDir(fslist, FilesystemNode::kListAll)) {
+		return kInvalidPathError;
+	}
+
+	// Invoke the detector
+	Common::String gameid = ConfMan.get("gameid");
+	GameList detectedGames = Engine_SWORD2_detectGames(fslist);
+
+	for (uint i = 0; i < detectedGames.size(); i++) {
+		if (detectedGames[i].gameid() == gameid) {
+			*engine = new Sword2::Sword2Engine(syst);
+			return kNoError;
+		}
+	}
+
+	return kNoGameDataFoundError;
+}
+
+REGISTER_PLUGIN(SWORD2, "Broken Sword 2", "Broken Sword Games (C) Revolution");
+
+namespace Sword2 {
+
+Sword2Engine::Sword2Engine(OSystem *syst) : Engine(syst) {
+	// Add default file directories
+	Common::File::addDefaultDirectory(_gameDataPath + "CLUSTERS/");
+	Common::File::addDefaultDirectory(_gameDataPath + "SWORD2/");
+	Common::File::addDefaultDirectory(_gameDataPath + "VIDEO/");
+	Common::File::addDefaultDirectory(_gameDataPath + "clusters/");
+	Common::File::addDefaultDirectory(_gameDataPath + "sword2/");
+	Common::File::addDefaultDirectory(_gameDataPath + "video/");
+
+	if (0 == scumm_stricmp(ConfMan.get("gameid").c_str(), "sword2demo"))
+		_features = GF_DEMO;
+	else
+		_features = 0;
+	
+	_bootParam = ConfMan.getInt("boot_param");
+	_saveSlot = ConfMan.getInt("save_slot");
+
+	_memory = NULL;
+	_resman = NULL;
+	_sound = NULL;
+	_screen = NULL;
+	_mouse = NULL;
+	_logic = NULL;
+	_fontRenderer = NULL;
+	_debugger = NULL;
+
+	_keyboardEvent.pending = false;
+	_mouseEvent.pending = false;
+
+	_wantSfxDebug = false;
+
+#ifdef SWORD2_DEBUG
+	_stepOneCycle = false;
+	_renderSkip = false;
+#endif
+
+	_gamePaused = false;
+	_graphicsLevelFudged = false;
+
+	_gameCycle = 0;
+	_gameSpeed = 1;
+
+	_quit = false;
+}
+
+Sword2Engine::~Sword2Engine() {
+	delete _debugger;
+	delete _sound;
+	delete _fontRenderer;
+	delete _screen;
+	delete _mouse;
+	delete _logic;
+	delete _resman;
+	delete _memory;
+}
+
+GUI::Debugger *Sword2Engine::getDebugger() {
+	return _debugger;
+}
+
+void Sword2Engine::registerDefaultSettings() {
+	ConfMan.registerDefault("gfx_details", 2);
+	ConfMan.registerDefault("reverse_stereo", false);
+}
+
+void Sword2Engine::readSettings() {
+	_mixer->setVolumeForSoundType(Audio::Mixer::kMusicSoundType, ConfMan.getInt("music_volume"));
+	_mixer->setVolumeForSoundType(Audio::Mixer::kSpeechSoundType, ConfMan.getInt("speech_volume"));
+	_mixer->setVolumeForSoundType(Audio::Mixer::kSFXSoundType, ConfMan.getInt("sfx_volume"));
+	setSubtitles(ConfMan.getBool("subtitles"));
+	_sound->muteMusic(ConfMan.getBool("music_mute"));
+	_sound->muteSpeech(ConfMan.getBool("speech_mute"));
+	_sound->muteFx(ConfMan.getBool("sfx_mute"));
+	_sound->setReverseStereo(ConfMan.getBool("reverse_stereo"));
+	_mouse->setObjectLabels(ConfMan.getBool("object_labels"));
+	_screen->setRenderLevel(ConfMan.getInt("gfx_details"));
+}
+
+void Sword2Engine::writeSettings() {
+	ConfMan.setInt("music_volume", _mixer->getVolumeForSoundType(Audio::Mixer::kMusicSoundType));
+	ConfMan.setInt("speech_volume", _mixer->getVolumeForSoundType(Audio::Mixer::kSpeechSoundType));
+	ConfMan.setInt("sfx_volume", _mixer->getVolumeForSoundType(Audio::Mixer::kSFXSoundType));
+	ConfMan.setBool("music_mute", _sound->isMusicMute());
+	ConfMan.setBool("speech_mute", _sound->isSpeechMute());
+	ConfMan.setBool("sfx_mute", _sound->isFxMute());
+	ConfMan.setInt("gfx_details", _screen->getRenderLevel());
+	ConfMan.setBool("subtitles", getSubtitles());
+	ConfMan.setBool("object_labels", _mouse->getObjectLabels());
+	ConfMan.setInt("reverse_stereo", _sound->isReverseStereo());
+
+	ConfMan.flushToDisk();
+}
+
+int Sword2Engine::getFramesPerSecond() {
+	return _gameSpeed * FRAMES_PER_SECOND;
+}
+
+/**
+ * The global script variables and player object should be kept open throughout
+ * the game, so that they are never expelled by the resource manager.
+ */
+
+void Sword2Engine::setupPersistentResources() {
+	_logic->_scriptVars = _resman->openResource(1) + ResHeader::size();
+	_resman->openResource(CUR_PLAYER_ID);
+}
+
+int Sword2Engine::init() {
+	// Get some falling RAM and put it in your pocket, never let it slip
+	// away
+
+	_debugger = NULL;
+	_sound = NULL;
+	_fontRenderer = NULL;
+	_screen = NULL;
+	_mouse = NULL;
+	_logic = NULL;
+	_resman = NULL;
+	_memory = NULL;
+
+	_system->beginGFXTransaction();
+		initCommonGFX(true);
+		_screen = new Screen(this, 640, 480);
+	_system->endGFXTransaction();
+
+	// Create the debugger as early as possible (but not before the
+	// screen object!) so that errors can be displayed in it. In
+	// particular, we want errors about missing files to be clearly
+	// visible to the user.
+
+	_debugger = new Debugger(this);
+
+	_memory = new MemoryManager(this);
+	_resman = new ResourceManager(this);
+
+	if (!_resman->init())
+		return 1;
+
+	_logic = new Logic(this);
+	_fontRenderer = new FontRenderer(this);
+	_sound = new Sound(this);
+	_mouse = new Mouse(this);
+
+	// Setup mixer
+	if (!_mixer->isReady())
+		warning("Sound initialization failed");
+
+	registerDefaultSettings();
+	readSettings();
+
+	initStartMenu();
+
+	// During normal gameplay, we care neither about mouse button releases
+	// nor the scroll wheel.
+	setInputEventFilter(RD_LEFTBUTTONUP | RD_RIGHTBUTTONUP | RD_WHEELUP | RD_WHEELDOWN);
+
+	setupPersistentResources();
+	initialiseFontResourceFlags();
+
+	if (_features & GF_DEMO)
+		_logic->writeVar(DEMO, 1);
+	else
+		_logic->writeVar(DEMO, 0);
+
+	if (_saveSlot != -1) {
+		if (saveExists(_saveSlot))
+			restoreGame(_saveSlot);
+		else {
+			RestoreDialog dialog(this);
+			if (!dialog.runModal())
+				startGame();
+		}
+	} else if (!_bootParam && saveExists()) {
+		int32 pars[2] = { 221, FX_LOOP };
+		bool result;
+
+		_mouse->setMouse(NORMAL_MOUSE_ID);
+		_logic->fnPlayMusic(pars);
+
+		StartDialog dialog(this);
+
+		result = (dialog.runModal() != 0);
+
+		// If the game is started from the beginning, the cutscene
+		// player will kill the music for us. Otherwise, the restore
+		// will either have killed the music, or done a crossfade.
+
+		if (_quit)
+			return 0;
+
+		if (result)
+			startGame();
+	} else
+		startGame();
+
+	_screen->initialiseRenderCycle();
+
+	return 0;
+}
+
+int Sword2Engine::go() {
+	while (1) {
+		if (_debugger->isAttached())
+			_debugger->onFrame();
+
+#ifdef SWORD2_DEBUG
+		if (_stepOneCycle) {
+			pauseGame();
+			_stepOneCycle = false;
+		}
+#endif
+
+		KeyboardEvent *ke = keyboardEvent();
+
+		if (ke) {
+			if ((ke->modifiers == Common::KBD_CTRL && ke->keycode == 'd') || ke->ascii == '#' || ke->ascii == '~') {
+				_debugger->attach();
+			} else if (ke->modifiers == 0 || ke->modifiers == Common::KBD_SHIFT) {
+				switch (ke->keycode) {
+				case 'p':
+					if (_gamePaused)
+						unpauseGame();
+					else
+						pauseGame();
+					break;
+				case 'c':
+					if (!_logic->readVar(DEMO) && !_mouse->isChoosing()) {
+						ScreenInfo *screenInfo = _screen->getScreenInfo();
+						_logic->fnPlayCredits(NULL);
+						screenInfo->new_palette = 99;
+					}
+					break;
+#ifdef SWORD2_DEBUG
+				case ' ':
+					if (_gamePaused) {
+						_stepOneCycle = true;
+						unpauseGame();
+					}
+					break;
+				case 's':
+					_renderSkip = !_renderSkip;
+					break;
+#endif
+				default:
+					break;
+				}
+			}
+		}
+
+		// skip GameCycle if we're paused
+		if (!_gamePaused) {
+			_gameCycle++;
+			gameCycle();
+		}
+
+		// We can't use this as termination condition for the loop,
+		// because we want the break to happen before updating the
+		// screen again.
+
+		if (_quit)
+			break;
+
+		// creates the debug text blocks
+		_debugger->buildDebugText();
+
+#ifdef SWORD2_DEBUG
+		// if not in console & '_renderSkip' is set, only render
+		// display once every 4 game-cycles
+
+		if (!_renderSkip || (_gameCycle % 4) == 0)
+			_screen->buildDisplay();
+#else
+		_screen->buildDisplay();
+#endif
+	}
+
+	return 0;
+}
+
+void Sword2Engine::closeGame() {
+	_quit = true;
+}
+
+void Sword2Engine::restartGame() {
+	ScreenInfo *screenInfo = _screen->getScreenInfo();
+	uint32 temp_demo_flag;
+
+	_mouse->closeMenuImmediately();
+
+	// Restart the game. To do this, we must...
+
+	// Stop music instantly!
+	_sound->stopMusic(true);
+
+	// In case we were dead - well we're not anymore!
+	_logic->writeVar(DEAD, 0);
+
+	// Restart the game. Clear all memory and reset the globals
+	temp_demo_flag = _logic->readVar(DEMO);
+
+	// Remove all resources from memory, including player object and
+	// global variables
+	_resman->removeAll();
+
+	// Reopen global variables resource and player object
+	setupPersistentResources();
+
+	_logic->writeVar(DEMO, temp_demo_flag);
+
+	// Free all the route memory blocks from previous game
+	_logic->_router->freeAllRouteMem();
+
+	// Call the same function that first started us up
+	startGame();
+
+	// Prime system with a game cycle
+
+	// Reset the graphic 'BuildUnit' list before a new logic list
+	// (see fnRegisterFrame)
+	_screen->resetRenderLists();
+
+	// Reset the mouse hot-spot list (see fnRegisterMouse and
+	// fnRegisterFrame)
+	_mouse->resetMouseList();
+
+	_mouse->closeMenuImmediately();
+
+	// FOR THE DEMO - FORCE THE SCROLLING TO BE RESET!
+	// - this is taken from fnInitBackground
+	// switch on scrolling (2 means first time on screen)
+	screenInfo->scroll_flag = 2;
+
+	if (_logic->processSession())
+		error("restart 1st cycle failed??");
+
+	// So palette not restored immediately after control panel - we want
+	// to fade up instead!
+	screenInfo->new_palette = 99;
+}
+
+bool Sword2Engine::checkForMouseEvents() {
+	return _mouseEvent.pending;
+}
+
+MouseEvent *Sword2Engine::mouseEvent() {
+	if (!_mouseEvent.pending)
+		return NULL;
+
+	_mouseEvent.pending = false;
+	return &_mouseEvent;
+}
+
+KeyboardEvent *Sword2Engine::keyboardEvent() {
+	if (!_keyboardEvent.pending)
+		return NULL;
+
+	_keyboardEvent.pending = false;
+	return &_keyboardEvent;
+}
+
+uint32 Sword2Engine::setInputEventFilter(uint32 filter) {
+	uint32 oldFilter = _inputEventFilter;
+
+	_inputEventFilter = filter;
+	return oldFilter;
+}
+
+/**
+ * OSystem Event Handler. Full of cross platform goodness and 99% fat free!
+ */
+
+void Sword2Engine::parseInputEvents() {
+	Common::Event event;
+
+	while (_eventMan->pollEvent(event)) {
+		switch (event.type) {
+		case Common::EVENT_KEYDOWN:
+			if (event.kbd.flags == Common::KBD_CTRL) {
+				if (event.kbd.keycode == 'f') {
+					if (_gameSpeed == 1)
+						_gameSpeed = 2;
+					else
+						_gameSpeed = 1;
+				}
+			}
+			if (!(_inputEventFilter & RD_KEYDOWN)) {
+				_keyboardEvent.pending = true;
+				_keyboardEvent.ascii = event.kbd.ascii;
+				_keyboardEvent.keycode = event.kbd.keycode;
+				_keyboardEvent.modifiers = event.kbd.flags;
+			}
+			break;
+		case Common::EVENT_LBUTTONDOWN:
+			if (!(_inputEventFilter & RD_LEFTBUTTONDOWN)) {
+				_mouseEvent.pending = true;
+				_mouseEvent.buttons = RD_LEFTBUTTONDOWN;
+			}
+			break;
+		case Common::EVENT_RBUTTONDOWN:
+			if (!(_inputEventFilter & RD_RIGHTBUTTONDOWN)) {
+				_mouseEvent.pending = true;
+				_mouseEvent.buttons = RD_RIGHTBUTTONDOWN;
+			}
+			break;
+		case Common::EVENT_LBUTTONUP:
+			if (!(_inputEventFilter & RD_LEFTBUTTONUP)) {
+				_mouseEvent.pending = true;
+				_mouseEvent.buttons = RD_LEFTBUTTONUP;
+			}
+			break;
+		case Common::EVENT_RBUTTONUP:
+			if (!(_inputEventFilter & RD_RIGHTBUTTONUP)) {
+				_mouseEvent.pending = true;
+				_mouseEvent.buttons = RD_RIGHTBUTTONUP;
+			}
+			break;
+		case Common::EVENT_WHEELUP:
+			if (!(_inputEventFilter & RD_WHEELUP)) {
+				_mouseEvent.pending = true;
+				_mouseEvent.buttons = RD_WHEELUP;
+			}
+			break;
+		case Common::EVENT_WHEELDOWN:
+			if (!(_inputEventFilter & RD_WHEELDOWN)) {
+				_mouseEvent.pending = true;
+				_mouseEvent.buttons = RD_WHEELDOWN;
+			}
+			break;
+		case Common::EVENT_QUIT:
+			closeGame();
+			break;
+		default:
+			break;
+		}
+	}
+}
+
+void Sword2Engine::gameCycle() {
+	// Do one game cycle, that is run the logic session until a full loop
+	// has been performed.
+
+	if (_logic->getRunList()) {
+		do {
+			// Reset the 'BuildUnit' and mouse hot-spot lists
+			// before each new logic list. The service scripts
+			// will fill thrm through fnRegisterFrame() and
+			// fnRegisterMouse().
+
+			_screen->resetRenderLists();
+			_mouse->resetMouseList();
+
+			// Keep going as long as new lists keep getting put in
+			// - i.e. screen changes.
+		} while (_logic->processSession());
+	} else {
+		// Start the console and print the start options perhaps?
+		_debugger->attach("AWAITING START COMMAND: (Enter 's 1' then 'q' to start from beginning)");
+	}
+
+	// If this screen is wide, recompute the scroll offsets every cycle
+	ScreenInfo *screenInfo = _screen->getScreenInfo();
+
+	if (screenInfo->scroll_flag)
+		_screen->setScrolling();
+
+	_mouse->mouseEngine();
+	_sound->processFxQueue();
+}
+
+void Sword2Engine::startGame() {
+	// Boot the game straight into a start script. It's always George's
+	// script #1, but with different ScreenManager objects depending on
+	// if it's the demo or the full game, or if we're using a boot param.
+
+	int screen_manager_id = 0;
+
+	debug(5, "startGame() STARTING:");
+
+	if (!_bootParam) {
+		if (_logic->readVar(DEMO))
+			screen_manager_id = 19;		// DOCKS SECTION START
+		else
+			screen_manager_id = 949;	// INTRO & PARIS START
+	} else {
+		// FIXME this could be validated against startup.inf for valid
+		// numbers to stop people shooting themselves in the foot
+
+		if (_bootParam != 0)
+			screen_manager_id = _bootParam;
+	}
+
+	_logic->runResObjScript(screen_manager_id, CUR_PLAYER_ID, 1);
+}
+
+// FIXME: Move this to some better place?
+
+void Sword2Engine::sleepUntil(uint32 time) {
+	while (getMillis() < time) {
+		// Make sure menu animations and fades don't suffer, but don't
+		// redraw the entire scene.
+		_mouse->processMenu();
+		_screen->updateDisplay(false);
+		_system->delayMillis(10);
+	}
+}
+
+void Sword2Engine::pauseGame() {
+	// Don't allow Pause while screen fading or while black
+	if (_screen->getFadeStatus() != RDFADE_NONE)
+		return;
+
+	_sound->pauseAllSound();
+	_mouse->pauseGame();
+
+	// If render level is at max, turn it down because palette-matching
+	// won't work when the palette is dimmed.
+
+	if (_screen->getRenderLevel() == 3) {
+		_screen->setRenderLevel(2);
+		_graphicsLevelFudged = true;
+	}
+
+#ifdef SWORD2_DEBUG
+	// Don't dim it if we're single-stepping through frames
+	// dim the palette during the pause
+
+	if (!_stepOneCycle)
+		_screen->dimPalette();
+#else
+	_screen->dimPalette();
+#endif
+
+	_gamePaused = true;
+}
+
+void Sword2Engine::unpauseGame() {
+	_mouse->unpauseGame();
+	_sound->unpauseAllSound();
+
+	// Put back game screen palette; see screen.cpp
+	_screen->setFullPalette(-1);
+
+	// If graphics level at max, turn up again
+	if (_graphicsLevelFudged) {
+		_screen->setRenderLevel(3);
+		_graphicsLevelFudged = false;
+	}
+
+	_gamePaused = false;
+
+	// If mouse is about or we're in a chooser menu
+	if (!_mouse->getMouseStatus() || _mouse->isChoosing())
+		_mouse->setMouse(NORMAL_MOUSE_ID);
+}
+
+uint32 Sword2Engine::getMillis() {
+	return _system->getMillis();
+}
+
+} // End of namespace Sword2

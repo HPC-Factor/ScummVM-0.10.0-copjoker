@@ -1,0 +1,103 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes" ?>
+<CodeBlocks_layout_file>
+	<ActiveTarget name="default" />
+	<File name="..\..\engines\parallaction\animation.cpp" open="0" top="0" tabpos="4">
+		<Cursor position="2198" topLine="48" />
+	</File>
+	<File name="..\..\engines\parallaction\archive.cpp" open="0" top="0" tabpos="12">
+		<Cursor position="3311" topLine="71" />
+	</File>
+	<File name="..\..\engines\parallaction\callables.cpp" open="0" top="0" tabpos="2">
+		<Cursor position="11738" topLine="405" />
+	</File>
+	<File name="..\..\engines\parallaction\commands.cpp" open="0" top="0" tabpos="4">
+		<Cursor position="8339" topLine="280" />
+	</File>
+	<File name="..\..\engines\parallaction\commands.h" open="0" top="0" tabpos="10">
+		<Cursor position="1669" topLine="24" />
+	</File>
+	<File name="..\..\engines\parallaction\debug.cpp" open="0" top="0" tabpos="7">
+		<Cursor position="1523" topLine="18" />
+	</File>
+	<File name="..\..\engines\parallaction\defs.h" open="0" top="0" tabpos="9">
+		<Cursor position="1167" topLine="15" />
+	</File>
+	<File name="..\..\engines\parallaction\detection.cpp" open="0" top="0" tabpos="13">
+		<Cursor position="3283" topLine="50" />
+	</File>
+	<File name="..\..\engines\parallaction\dialogue.cpp" open="0" top="0" tabpos="12">
+		<Cursor position="9886" topLine="331" />
+	</File>
+	<File name="..\..\engines\parallaction\disk.cpp" open="1" top="1" tabpos="1">
+		<Cursor position="12394" topLine="590" />
+	</File>
+	<File name="..\..\engines\parallaction\disk.h" open="0" top="0" tabpos="10">
+		<Cursor position="2566" topLine="85" />
+	</File>
+	<File name="..\..\engines\parallaction\font.cpp" open="0" top="0" tabpos="12">
+		<Cursor position="2879" topLine="102" />
+	</File>
+	<File name="..\..\engines\parallaction\graphics.cpp" open="0" top="0" tabpos="4">
+		<Cursor position="9121" topLine="275" />
+	</File>
+	<File name="..\..\engines\parallaction\graphics.h" open="0" top="0" tabpos="2">
+		<Cursor position="4971" topLine="148" />
+	</File>
+	<File name="..\..\engines\parallaction\intro.cpp" open="0" top="0" tabpos="3">
+		<Cursor position="7371" topLine="0" />
+	</File>
+	<File name="..\..\engines\parallaction\inventory.cpp" open="0" top="0" tabpos="7">
+		<Cursor position="2257" topLine="42" />
+	</File>
+	<File name="..\..\engines\parallaction\inventory.h" open="0" top="0" tabpos="14">
+		<Cursor position="1402" topLine="10" />
+	</File>
+	<File name="..\..\engines\parallaction\location.cpp" open="0" top="0" tabpos="15">
+		<Cursor position="5172" topLine="133" />
+	</File>
+	<File name="..\..\engines\parallaction\menu.cpp" open="0" top="0" tabpos="8">
+		<Cursor position="6240" topLine="250" />
+	</File>
+	<File name="..\..\engines\parallaction\menu.h" open="0" top="0" tabpos="17">
+		<Cursor position="1131" topLine="7" />
+	</File>
+	<File name="..\..\engines\parallaction\module.mk" open="0" top="0" tabpos="8">
+		<Cursor position="373" topLine="0" />
+	</File>
+	<File name="..\..\engines\parallaction\music.cpp" open="0" top="0" tabpos="1">
+		<Cursor position="7456" topLine="265" />
+	</File>
+	<File name="..\..\engines\parallaction\music.h" open="0" top="0" tabpos="6">
+		<Cursor position="2468" topLine="45" />
+	</File>
+	<File name="..\..\engines\parallaction\parallaction.cpp" open="0" top="0" tabpos="8">
+		<Cursor position="6534" topLine="267" />
+	</File>
+	<File name="..\..\engines\parallaction\parallaction.h" open="0" top="0" tabpos="11">
+		<Cursor position="1559" topLine="78" />
+	</File>
+	<File name="..\..\engines\parallaction\parser.cpp" open="0" top="0" tabpos="1">
+		<Cursor position="3952" topLine="52" />
+	</File>
+	<File name="..\..\engines\parallaction\parser.h" open="0" top="0" tabpos="6">
+		<Cursor position="1430" topLine="4" />
+	</File>
+	<File name="..\..\engines\parallaction\saveload.cpp" open="0" top="0" tabpos="16">
+		<Cursor position="9837" topLine="365" />
+	</File>
+	<File name="..\..\engines\parallaction\staticres.cpp" open="0" top="0" tabpos="15">
+		<Cursor position="2760" topLine="59" />
+	</File>
+	<File name="..\..\engines\parallaction\walk.cpp" open="0" top="0" tabpos="5">
+		<Cursor position="4484" topLine="128" />
+	</File>
+	<File name="..\..\engines\parallaction\walk.h" open="0" top="0" tabpos="2">
+		<Cursor position="1668" topLine="23" />
+	</File>
+	<File name="..\..\engines\parallaction\zone.cpp" open="0" top="0" tabpos="13">
+		<Cursor position="7574" topLine="239" />
+	</File>
+	<File name="..\..\engines\parallaction\zone.h" open="0" top="0" tabpos="14">
+		<Cursor position="2831" topLine="28" />
+	</File>
+</CodeBlocks_layout_file>
